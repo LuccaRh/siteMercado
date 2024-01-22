@@ -26,5 +26,18 @@ namespace Mercado.DAL
             connection.Execute(query, produto);
             return true;
         }
+        public bool AtualizarProduto(Produto produto)
+        {
+            using var connection = new BdConnection().AbrirConexao();
+            string query = _MétodosProdutoDAL.StringAtualizar();
+            connection.Execute(query, produto);
+            return true;
+        }
+        public bool DeletarProduto(int idProduto)
+        {
+            using var connection = new BdConnection().AbrirConexao();
+            string query = @"DELETE FROM ProdutosTB WHERE IdProduto = @idProduto"; ;
+            return connection.Execute(query, new { IdProduto = idProduto}) > 0;
+        }
     }
 }

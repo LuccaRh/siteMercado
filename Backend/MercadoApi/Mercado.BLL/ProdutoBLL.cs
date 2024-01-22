@@ -22,5 +22,25 @@ namespace Mercado.BLL
         {
             return _ProdutoDAL.ListarProduto(produto);
         }
+        public Produto AtualizarProduto(Produto produto)
+        {
+            if (!_ProdutoDAL.AtualizarProduto(produto))
+            {
+                throw new Exception("Erro ao cadastrar.");
+            }
+            return produto;
+        }
+        public bool DeletarProduto(int idProduto)
+        {
+            if (idProduto <= 0)
+            {
+                throw new Exception("Apenas valores positivos");
+            }
+            if (!_ProdutoDAL.DeletarProduto(idProduto))
+            {
+                throw new Exception("Erro ao atualizar.");
+            }
+            return true;
+        }
     }
 }

@@ -38,5 +38,29 @@ namespace MercadoApi.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpPut("AtualizarProduto")]
+        public IActionResult AtualizarProduto([FromBody] Produto produto)
+        {
+            try
+            {
+                return Ok(_ProdutoBLL.AtualizarProduto(produto));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpDelete("DeletarProduto")]
+        public IActionResult DeletarProduto([FromQuery] int idProduto)
+        {
+            try
+            {
+                return Ok(_ProdutoBLL.DeletarProduto(idProduto));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
