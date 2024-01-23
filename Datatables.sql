@@ -1,6 +1,6 @@
 CREATE DATABASE siteMercadoDB;
 
-CREATE TABLE siteMercadoDB.dbo.ProdutosTB(
+CREATE TABLE ProdutosTB(
 	IdProduto INT PRIMARY KEY IDENTITY,
 	Nome VARCHAR(80) NOT NULL,
 	Valor DECIMAL(6,2) CHECK (Valor > 0),
@@ -9,14 +9,13 @@ CREATE TABLE siteMercadoDB.dbo.ProdutosTB(
 	Imagem VARCHAR(100) NOT NULL
 ) 
 
-SELECT * FROM siteMercadoDB.dbo.ProdutosTB;
+SELECT * FROM ProdutosTB;
 
-CREATE TABLE siteMercadoDB.dbo.UsuáriosTB(
+CREATE TABLE UsuáriosTB(
 	IdUsuário INT PRIMARY KEY IDENTITY,
 	Email VARCHAR(120) NOT NULL UNIQUE,
 	Nome VARCHAR(120) NOT NULL,
-	Endereço VARCHAR(500),
-	Cargo VARCHAR(70) NOT NULL
+	Senha VARCHAR(150) NOT NULL,
+	Salt VARCHAR(16) NOT NULL,
+	Cargo VARCHAR(30) NOT NULL
 )
-
-SELECT * FROM siteMercadoDB.dbo.UsuáriosTB;

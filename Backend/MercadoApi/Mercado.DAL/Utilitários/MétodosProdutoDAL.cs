@@ -70,13 +70,15 @@ namespace Mercado.DAL.Utilitários
         }
         public string StringAtualizar()
         {
-            string query = @"UPDATE siteMercadoDB.dbo.ProdutosTB SET";
+            string query = @"UPDATE ProdutosTB SET";
             Type tipo = typeof(Produto);
             PropertyInfo[] propriedades = tipo.GetProperties();
             foreach (PropertyInfo propriedade in propriedades)
             {
                 string nomePropriedade = propriedade.Name;
                 if (nomePropriedade == "idProduto") { continue; }
+                //Se não quiser mudar a propriedade, o valor foi mandado como null, logo o ISNULL detecta isso e 
+                //seta a propriedade como ela já estava
                 query += String.Format(" {0} = ISNULL(@{1},{2}),", nomePropriedade, nomePropriedade, nomePropriedade);
             }
             query = query.TrimEnd(',');

@@ -1,6 +1,5 @@
 ﻿using Mercado.BLL;
 using Mercado.MOD;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MercadoApi.Controllers
