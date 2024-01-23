@@ -1,49 +1,25 @@
-﻿using System.Security.Cryptography;
-using System.Text;
+﻿using System.Runtime.ConstrainedExecution;
 
-string pepper = "RV";
-static string ByteArrayToHexString(byte[] ba)
+string cep = "13083-860";
+cep = new string(cep.Where(char.IsDigit).ToArray());
+Console.WriteLine(cep);
+if (cep.Length != 8)
 {
-    StringBuilder hex = new StringBuilder(ba.Length * 2);
-    foreach (byte b in ba)
-        hex.AppendFormat("{0:x2}", b);
-    return hex.ToString();
+    string erro = "Digite um cep válido.";
+    throw new Exception(erro);
 }
-
-string CreateSalt(int size)
+//Pode ser no formato 01509000 ou 01509-000
+var addresses = new Correios.NET.CorreiosService().GetAddresses(cep);
+Dictionary<string, string> dic = new Dictionary<string, string>();
+foreach (var address in addresses)
 {
-    var rng = new RNGCryptoServiceProvider();
-    var buff = new byte[size];
-    rng.GetBytes(buff);
-    return Convert.ToBase64String(buff);
+    dic.Add("Cep", address.ZipCode);
+    dic.Add("Rua", address.Street);
+    dic.Add("Bairro", address.District);
+    dic.Add("Cidade", address.City);
+    dic.Add("Estado", address.State);
 }
-string GenerateSHA256Hash(string senha, string salt)
+foreach (var (key, value) in dic)
 {
-    byte[] bytes = Encoding.UTF8.GetBytes(senha + salt + pepper);
-    SHA256Managed sha256hashstring = new SHA256Managed();
-    byte[] hash = sha256hashstring.ComputeHash(bytes);
-    string ass =  ByteArrayToHexString(hash);
-    return ass;
-}
-bool VerifyPassword(string enteredPassword, string salt, string storedHashedPassword)
-{
-    Console.WriteLine("enteredPassword: " + enteredPassword);
-    Console.WriteLine("salt: " + salt);
-    Console.WriteLine("storedHash: " + storedHashedPassword);
-    string hashedInputPassword = GenerateSHA256Hash(enteredPassword, salt);
-    Console.WriteLine("InputHash: " + hashedInputPassword);
-    return hashedInputPassword == storedHashedPassword;
-}
-string senha = "keiko123";
-string salt = CreateSalt(10);
-string storedHashedPassword = GenerateSHA256Hash(senha, salt);
-if (VerifyPassword(senha, salt, storedHashedPassword))
-{
-    Console.WriteLine("Senha correta");
-}
-else
-{
-    {
-        Console.WriteLine("Senha incorreta");
-    }
+    Console.WriteLine($"{key}: {value}");
 }

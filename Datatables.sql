@@ -19,3 +19,17 @@ CREATE TABLE UsuáriosTB(
 	Salt VARCHAR(16) NOT NULL,
 	Cargo VARCHAR(30) NOT NULL
 )
+
+SELECT * FROM ProdutosTB;
+
+CREATE TABLE EndereçosTB(
+    IdEndereço INT PRIMARY KEY,
+    IdUsuário INT FOREIGN KEY REFERENCES UsuáriosTB(IdUsuário),
+	Número SMALLINT,
+    CEP NVARCHAR(10),
+    Rua NVARCHAR(255),
+    Cidade NVARCHAR(100),
+    Estado NVARCHAR(50),
+);
+
+SELECT * FROM EndereçosTB;
