@@ -26,7 +26,7 @@ namespace Mercado.BLL
         {
             if (!_ProdutoDAL.AtualizarProduto(produto))
             {
-                throw new Exception("Erro ao cadastrar.");
+                throw new Exception("Erro ao Atualizar.");
             }
             return produto;
         }
@@ -38,7 +38,7 @@ namespace Mercado.BLL
             }
             if (!_ProdutoDAL.DeletarProduto(idProduto))
             {
-                throw new Exception("Erro ao atualizar.");
+                throw new Exception("Erro ao Deletar.");
             }
             return true;
         }

@@ -12,4 +12,8 @@
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Mercado.MOD\Mercado.MOD.csproj" />
+  </ItemGroup>
+
 </Project>

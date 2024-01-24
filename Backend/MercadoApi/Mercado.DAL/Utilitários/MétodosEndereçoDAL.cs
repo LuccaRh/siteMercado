@@ -3,19 +3,18 @@ using System.Reflection;
 
 namespace Mercado.DAL.Utilitários
 {
-    public class MétodosProdutoDAL
+    public class MétodosEndereçoDAL
     {
-        //Monta string para lista de items, utilizando um filtro de busca com base no JSON passado
-        public string StringListagem(Produto produto)
+        public string StringListagem(Endereço endereço)
         {
-            //Pega o nome de cada variável do objeto produto, verifica se no JSON foi passado algum valor para esta variável
+            //Pega o nome de cada variável do objeto Endereço, verifica se no JSON foi passado algum valor para esta variável
             //Se foi, monta o resto da procura com WHERE e AND
-            string query = "SELECT * FROM ProdutosTB";
+            string query = "SELECT * FROM EndereçosTB";
             bool filtragem = false;
-            PropertyInfo[] propriedades = produto.GetType().GetProperties();
+            PropertyInfo[] propriedades = endereço.GetType().GetProperties();
             foreach (PropertyInfo propriedade in propriedades)
             {
-                var valor = propriedade.GetValue(produto, null);
+                var valor = propriedade.GetValue(endereço, null);
                 string nomePropriedade = propriedade.Name;
                 if (valor != null)
                 {
@@ -47,13 +46,13 @@ namespace Mercado.DAL.Utilitários
         public string StringCadastro()
         {
             //loop para pegar o nome de cada propriedade do objeto, inserir elas no query
-            string query = "INSERT INTO ProdutosTB (";
-            Type tipo = typeof(Produto);
+            string query = "INSERT INTO EndereçosTB (";
+            Type tipo = typeof(Endereço);
             PropertyInfo[] propriedades = tipo.GetProperties();
             foreach (PropertyInfo propriedade in propriedades)
             {
                 string nomePropriedade = propriedade.Name;
-                if (nomePropriedade == "idProduto") { continue; }
+                if (nomePropriedade == "idEndereço") { continue; }
                 query += String.Format(" {0},", nomePropriedade);
             }
 
@@ -61,7 +60,7 @@ namespace Mercado.DAL.Utilitários
             foreach (PropertyInfo propriedade in propriedades)
             {
                 string nomePropriedade = propriedade.Name;
-                if (nomePropriedade == "idProduto") { continue; }
+                if (nomePropriedade == "idEndereço") { continue; }
                 query += String.Format(" @{0},", nomePropriedade);
             }
             query = query.TrimEnd(',') + ")";
@@ -69,19 +68,19 @@ namespace Mercado.DAL.Utilitários
         }
         public string StringAtualizar()
         {
-            string query = @"UPDATE ProdutosTB SET";
-            Type tipo = typeof(Produto);
+            string query = @"UPDATE EndereçosTB SET";
+            Type tipo = typeof(Endereço);
             PropertyInfo[] propriedades = tipo.GetProperties();
             foreach (PropertyInfo propriedade in propriedades)
             {
                 string nomePropriedade = propriedade.Name;
-                if (nomePropriedade == "idProduto") { continue; }
+                if (nomePropriedade == "idEndereço") { continue; }
                 //Se não quiser mudar a propriedade, o valor foi mandado como null, logo o ISNULL detecta isso e 
                 //seta a propriedade como ela já estava
                 query += String.Format(" {0} = ISNULL(@{1},{2}),", nomePropriedade, nomePropriedade, nomePropriedade);
             }
             query = query.TrimEnd(',');
-            query += " WHERE IdProduto = @idProduto;";
+            query += " WHERE IdEndereço = @idEndereço;";
             return query;
         }
     }

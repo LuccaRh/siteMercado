@@ -1,12 +1,10 @@
-﻿using AngleSharp.Html.Dom;
-using Correios.NET.Models;
-using System.Net;
+﻿using Mercado.MOD;
 
 namespace Mercado.BLL.Utilitários
 {
     public class CepEndereço
     {
-        public Dictionary<string,string> Endereço(string cep)
+        public Dictionary<string,string> CepEspecificações(string cep)
         {
             cep = new string(cep.Where(char.IsDigit).ToArray());
             if (cep.Length != 8) 
@@ -27,6 +25,14 @@ namespace Mercado.BLL.Utilitários
                 Console.WriteLine("{0} - {1} - {2} - {3}/{4}", address.ZipCode, address.Street, address.District, address.City, address.State);
             }
             return dic;
+        }
+        public void EndereçoCep(Endereço endereço)
+        {
+            Dictionary<string, string> valores = CepEspecificações(endereço.cep);
+            if (endereço.rua == null) { endereço.rua = valores["Rua"]; }
+            if (endereço.bairro == null) { endereço.bairro = valores["Bairro"]; }
+            if (endereço.cidade == null) { endereço.cidade = valores["Cidade"]; }
+            if (endereço.estado == null) { endereço.estado = valores["Estado"]; }
         }
     }
 }

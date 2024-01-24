@@ -53,7 +53,7 @@ namespace Mercado.BLL
             }
             if (!_UsuárioDAL.DeletarUsuário(idUsuário))
             {
-                throw new Exception("Erro ao atualizar.");
+                throw new Exception("Erro ao Deletar.");
             }
             return true;
         }

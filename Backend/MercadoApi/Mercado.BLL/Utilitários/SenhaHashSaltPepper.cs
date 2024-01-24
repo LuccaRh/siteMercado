@@ -1,6 +1,5 @@
 ﻿using System.Text;
 using System.Security.Cryptography;
-using Mercado.MOD;
 
 namespace Mercado.BLL.Utilitários
 {
