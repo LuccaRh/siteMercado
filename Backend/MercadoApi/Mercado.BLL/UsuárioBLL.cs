@@ -17,10 +17,12 @@ namespace Mercado.BLL
         }
         public Usuário CadastrarUsuário(Usuário usuário)
         {
+            //Criação senha HashSaltPepper:
             _Verificações.Senha(usuário.senha);
             string salt = _SenhaHashSaltPepper.CreateSalt(10);
             usuário.salt = salt;
             usuário.senha = _SenhaHashSaltPepper.GenerateSHA256Hash(usuário.senha, salt);
+
             if (!_UsuárioDAL.CadastrarUsuário(usuário))
             {
                 throw new Exception("Erro ao cadastrar.");
