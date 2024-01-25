@@ -3,11 +3,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Adicione a configuração CORS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAnyOrigin", builder =>
+    options.AddPolicy("AllowLocalhost", builder =>
     {
-        builder.AllowAnyOrigin()
+        builder.WithOrigins("http://127.0.0.1:5500", "http://localhost:5500") // ou "http://localhost:5500" dependendo da sua configuração local
                .AllowAnyMethod()
-               .AllowAnyHeader();
+               .AllowAnyHeader()
+               .AllowCredentials(); // Permitir credenciais
     });
 });
 
@@ -30,7 +31,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 // Configure CORS antes de outros middlewares
-app.UseCors("AllowAnyOrigin");
+app.UseCors("AllowLocalhost");
 
 app.UseAuthorization();
 

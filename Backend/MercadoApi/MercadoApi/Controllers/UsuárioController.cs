@@ -1,6 +1,7 @@
 ﻿using Mercado.BLL;
 using Mercado.MOD;
 using Microsoft.AspNetCore.Mvc;
+using TokenJwtLogin;
 
 namespace MercadoApi.Controllers
 {
@@ -19,6 +20,27 @@ namespace MercadoApi.Controllers
             try
             {
                 return Ok(_UsuárioBLL.CadastrarUsuário(usuario));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpPost("LoginUsuário")]
+        public IActionResult LoginUsuário([FromBody] Usuário usuario)
+        {
+            try
+            {
+                bool auth = _UsuárioBLL.LoginUsuário(usuario);
+                if(auth)
+                {
+                    var token = TokenBuilder.GenerateToken(usuario);
+                    return Ok(new { Token = token });
+                }
+                else
+                {
+                    return Unauthorized(new { Message = "Falha na autenticação" });
+                }
             }
             catch (Exception ex)
             {
@@ -55,6 +77,30 @@ namespace MercadoApi.Controllers
             try
             {
                 return Ok(_UsuárioBLL.DeletarUsuário(idUsuário));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpGet("ObterInformacoesUsuario")]
+        public IActionResult ObterInformacoesUsuario()
+        {
+            try
+            {
+                // Obtenha o token da solicitação
+                var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+
+                // Decodifique o token e obtenha as informações do usuário
+                var tokenInfo = TokenBuilder.DecodeToken(token);
+
+                // Retorne as informações do usuário como JSON
+                return Ok(new
+                {
+                    Nome = tokenInfo.nome,
+                    IdUsuario = tokenInfo.idUsuário,
+                    Cargo = tokenInfo.cargo
+                });
             }
             catch (Exception ex)
             {

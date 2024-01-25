@@ -28,10 +28,10 @@ namespace Mercado.BLL.Utilitários
             byte[] hash = sha256hashstring.ComputeHash(bytes);
             return ByteArrayToHexString(hash);
         }
-        bool VerifyPassword(string enteredPassword, string salt, string storedHashedPassword)
+        public bool VerifyPassword(string senhaParaConferir, string salt, string senhaHashedGuardada)
         {
-            string hashedInputPassword = GenerateSHA256Hash(enteredPassword, salt);
-            return hashedInputPassword == storedHashedPassword;
+            string senhaParaConferirHashed = GenerateSHA256Hash(senhaParaConferir, salt);
+            return senhaParaConferirHashed == senhaHashedGuardada;
         }
     }
 }

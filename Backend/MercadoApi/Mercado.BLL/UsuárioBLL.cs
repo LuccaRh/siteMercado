@@ -29,6 +29,22 @@ namespace Mercado.BLL
             }
             return usuário;
         }
+        public bool LoginUsuário(Usuário _Usuário)
+        {
+            Usuário confirmação = _UsuárioDAL.LoginUsuário(_Usuário);
+            if (confirmação == null)
+            {
+                throw new Exception("Nome não encontrado.");
+            }
+            if (!_SenhaHashSaltPepper.VerifyPassword(_Usuário.senha, confirmação.salt, confirmação.senha))
+            {
+                throw new Exception("Usuário não registrado");
+            }
+            //Colocar cargo e id na entrada(_Usuário) para ser usado para criar o token
+            _Usuário.cargo = confirmação.cargo;
+            _Usuário.idUsuário = confirmação.idUsuário;
+            return true;
+        }
         public Usuário AtualizarUsuário(Usuário usuário)
         {
             if (usuário.senha  != null)

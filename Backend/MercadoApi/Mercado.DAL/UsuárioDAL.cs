@@ -23,10 +23,16 @@ namespace Mercado.DAL
             string query = _MétodosUsuárioDAL.StringAtualizar();
             return connection.Execute(query, usuario) > 0;
         }
+        public Usuário LoginUsuário(Usuário usuario)
+        {
+            using var connection = new BdConnection().AbrirConexao();
+            string query = "SELECT * FROM UsuáriosTB WHERE Nome = @nome;";
+            return connection.QueryFirstOrDefault<Usuário>(query, usuario);
+        }
         public bool DeletarUsuário(int idUsuário)
         {
             using var connection = new BdConnection().AbrirConexao();
-            string query = @"DELETE FROM UsuáriosTB WHERE IdUsuário = @idUsuário"; ;
+            string query = @"DELETE FROM UsuáriosTB WHERE IdUsuário = @idUsuário"; 
             return connection.Execute(query, new { IdUsuário = idUsuário }) > 0;
         }
         public List<Usuário> ListarUsuário(Usuário usuário)
