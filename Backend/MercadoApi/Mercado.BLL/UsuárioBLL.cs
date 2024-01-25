@@ -47,6 +47,7 @@ namespace Mercado.BLL
         }
         public Usuário AtualizarUsuário(Usuário usuário)
         {
+            //Detectar se o usuário trocou a senha:
             if (usuário.senha  != null)
             {
                 _Verificações.Senha(usuário.senha);

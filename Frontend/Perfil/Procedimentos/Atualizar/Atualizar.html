@@ -15,6 +15,7 @@
             <nav>
                 <h1 class = "logo"><a href="..\Home\Home.html">Meu Site</a></h1>
                 <ul>
+                    <li><a href="../../Perfil.html" ><span id = "Nome"></span></a></li>
                     <li><a href="#" id="logoutLink">Logout</a></li>
                 </ul>
             </nav>
@@ -23,18 +24,18 @@
         <main>
             <form id="formLoginConta">
                 <h2>Atualizar a Conta</h2>
-                <label for="username">Nome</label>
-                <input type="text" id="username" required>
+                <label for="nome">Nome</label>
+                <input type="text" id="nome">
                 <label for="email">Email</label>
-                <input type="text" id="email" required>
-                <label for="password">Senha</label>
-                <input type="password" id="password" required>
+                <input type="text" id="email">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha">
                 <button type="submit">Atualizar</button>
             </form>
         </main>
 
     </body>
-
+    <div id="error-message"></div>
     <script src="Atualizar.js"></script>
     <script src="../MétodosToken.js"></script>        
 </html>

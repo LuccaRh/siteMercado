@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", async (event) =>{
             // Aqui, 'data' conterá as informações do usuário retornadas pelo backend
             console.log(data);
             nome.textContent = data["nome"]; //Pegando nome do usuário para o Bem vindo, {nome}
-
             //Verificando cargo:
             if (data["cargo"] == "moderador"){
                 mod.style.display = "block";
@@ -26,21 +25,14 @@ document.addEventListener("DOMContentLoaded", async (event) =>{
         })
 }); 
 
-//Logout da página ao clickar em Logout
-document.addEventListener('DOMContentLoaded', function () {
-    const logoutLink = document.getElementById('logoutLink');
-
-    if (logoutLink) {
-      logoutLink.addEventListener('click', function (event) {
-        event.preventDefault(); // Evita que o link redirecione para outra página
-
+  //Logout da página ao clickar em Logout
+const logoutLink = document.getElementById('logoutLink');
+logoutLink.addEventListener('click', function () {
         // Função de logout aqui (por exemplo, limpar o token do localStorage)
         localStorage.removeItem('token');
 
         // Redireciona para a página de login ou outra página desejada
         window.location.href = '../Login/Login.html';
-      });
-    }
   });
 
 //Detecção se Usuário está realmente logado

@@ -25,3 +25,23 @@ document.addEventListener('DOMContentLoaded', function () {
       window.location.href = "../../../Login/Login.html";
   }
 });
+
+//Utilizar do token para pegar nome do usuário
+document.addEventListener("DOMContentLoaded", async (event) =>{
+    event.preventDefault();
+    let nome = document.getElementById('Nome');
+    await fetch('https://localhost:7071/Usuário/ObterInformacoesUsuario', {
+        method: 'GET',
+        headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Aqui, 'data' conterá as informações do usuário retornadas pelo backend
+            nome.textContent = data["nome"]; //Pegando nome do usuário para o Bem vindo, {nome}            
+        })
+        .catch(error => {
+            console.error('Erro ao obter informações do usuário:', error);
+        })
+}); 
