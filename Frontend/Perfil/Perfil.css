@@ -1,0 +1,14 @@
+p a {
+    color: #D6AFAF;
+}
+
+p a{
+    text-decoration: none;
+}
+
+p a{
+    color: var(--CorTextoPadrão); 
+    font-weight: bolder;
+    font-size: 20px;
+    margin-right: 20px;
+}

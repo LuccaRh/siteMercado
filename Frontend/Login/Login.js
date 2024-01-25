@@ -30,21 +30,7 @@ createAccountForm.addEventListener('submit',
         alert("Usuário Logado com sucesso.");
         console.log("Token Valor: ", localStorage.getItem('token'));
 
-        fetch('https://localhost:7071/Usuário/ObterInformacoesUsuario', {
-            method: 'GET',
-            headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Aqui, 'data' conterá as informações do usuário retornadas pelo backend
-            console.log(data);
-        })
-        .catch(error => {
-            console.error('Erro ao obter informações do usuário:', error);
-        });
-
+        window.location.href = "../Perfil/Perfil.html"
     } catch (error) {
         console.error('Erro ao fazer login:', error);
     }
