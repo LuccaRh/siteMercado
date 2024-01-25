@@ -53,3 +53,5 @@ CREATE TABLE siteMercadoDB.dbo.DetalhesPedidosTB (
 	ValorUnitário DECIMAL(6,2) CONSTRAINT NúmerosPositivosDetalhePedido CHECK (ValorUnitário > 0),
 );
 SELECT * FROM siteMercadoDB.dbo.DetalhesPedidosTB;
+
+UPDATE UsuáriosTB SET Cargo = 'moderador' WHERE IdUsuário = 3;

@@ -1,7 +1,8 @@
-//Utilizar do token para pegar nome do usuário
+//Utilizar do token para pegar nome do usuário, e verificar cargo
 document.addEventListener("DOMContentLoaded", async (event) =>{
     event.preventDefault();
     let nome = document.getElementById('Nome');
+    let mod = document.getElementById('moderador');
     await fetch('https://localhost:7071/Usuário/ObterInformacoesUsuario', {
         method: 'GET',
         headers: {
@@ -12,13 +13,18 @@ document.addEventListener("DOMContentLoaded", async (event) =>{
         .then(data => {
             // Aqui, 'data' conterá as informações do usuário retornadas pelo backend
             console.log(data);
-            nome.textContent = data["nome"];
+            nome.textContent = data["nome"]; //Pegando nome do usuário para o Bem vindo, {nome}
+
+            //Verificando cargo:
+            if (data["cargo"] == "moderador"){
+                mod.style.display = "block";
+            }
+
         })
         .catch(error => {
             console.error('Erro ao obter informações do usuário:', error);
         })
 }); 
-//console.log(window.location.pathname);
 
 //Logout da página ao clickar em Logout
 document.addEventListener('DOMContentLoaded', function () {
