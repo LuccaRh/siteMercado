@@ -1,4 +1,4 @@
-//Utilizar do token para pegar nome do usuário, e verificar cargo
+//Utilizar do token para verificar cargo
 document.addEventListener("DOMContentLoaded", async (event) =>{
     event.preventDefault();
     let nome = document.getElementById('Nome');
@@ -12,8 +12,6 @@ document.addEventListener("DOMContentLoaded", async (event) =>{
         .then(response => response.json())
         .then(data => {
             // Aqui, 'data' conterá as informações do usuário retornadas pelo backend
-            console.log(data);
-            nome.textContent = data["nome"]; //Pegando nome do usuário para o Bem vindo, {nome}
             //Verificando cargo:
             if (data["cargo"] == "moderador"){
                 mod.style.display = "block";
@@ -24,24 +22,3 @@ document.addEventListener("DOMContentLoaded", async (event) =>{
             console.error('Erro ao obter informações do usuário:', error);
         })
 }); 
-
-  //Logout da página ao clickar em Logout
-const logoutLink = document.getElementById('logoutLink');
-logoutLink.addEventListener('click', function () {
-        // Função de logout aqui (por exemplo, limpar o token do localStorage)
-        localStorage.removeItem('token');
-
-        // Redireciona para a página de login ou outra página desejada
-        window.location.href = '../Login/Login.html';
-  });
-
-//Detecção se Usuário está realmente logado
-document.addEventListener('DOMContentLoaded', function () {
-    const token = localStorage.getItem('token');
-
-    if (!token) {
-        // Usuário não autenticado, redirecione para a página de login
-        alert("Usuário não logado.");
-        window.location.href = '../Login/Login.html';
-    }
-});

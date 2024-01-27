@@ -14,7 +14,7 @@ createAccountForm.addEventListener('submit',
       credentials: 'include',
       body: JSON.stringify(data)
     };
-
+    //Criação do token no backend, ele é pego e armazenado no localstorage do browser
     try {
         const res = await fetch('https://localhost:7071/Usuário/LoginUsuário', options);
 
@@ -22,10 +22,13 @@ createAccountForm.addEventListener('submit',
             throw new Error(await res.text());
         }
 
+        //Alocação do token no browser, além do token com a validade dele
         const json = await res.json();
-        const token = json.Token;
-        // Armazene o token conforme necessário (local storage, cookies, etc.)
         localStorage.setItem('token', json["token"]);
+        //Validade:
+        var dataAtual = new Date();
+        dataAtual.setHours(dataAtual.getHours() + 1);
+        localStorage.setItem('tokenValidade', dataAtual);
 
         alert("Usuário Logado com sucesso.");
         console.log("Token Valor: ", localStorage.getItem('token'));
@@ -35,5 +38,4 @@ createAccountForm.addEventListener('submit',
         console.error('Erro ao fazer login:', error);
     }
 });
-
 

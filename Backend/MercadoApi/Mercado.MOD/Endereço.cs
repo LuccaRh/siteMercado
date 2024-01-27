@@ -4,6 +4,7 @@
     {
         public int? idEndereço { get; set; }
         public int? idUsuário { get; set; }
+        public string? nomeEndereço { get; set; }
         public int? número { get; set; }
         public string? cep { get; set; }
         public string? rua { get; set; }

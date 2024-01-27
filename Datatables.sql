@@ -25,6 +25,7 @@ SELECT * FROM siteMercadoDB.dbo.UsuáriosTB;
 CREATE TABLE siteMercadoDB.dbo.EndereçosTB(
     IdEndereço INT PRIMARY KEY IDENTITY,
     IdUsuário INT FOREIGN KEY REFERENCES UsuáriosTB(IdUsuário),
+	NomeEndereço NVARCHAR(50) NOT NULL,
 	Número SMALLINT,
     CEP NVARCHAR(10),
     Rua NVARCHAR(255),
@@ -33,6 +34,7 @@ CREATE TABLE siteMercadoDB.dbo.EndereçosTB(
     Estado NVARCHAR(50),
 );
 SELECT * FROM siteMercadoDB.dbo.EndereçosTB;
+ALTER TABLE EndereçosTB ALTER COLUMN NomeEndereço NomeEndereço datatype NULL;
 
 
 CREATE TABLE siteMercadoDB.dbo.PedidosTB(
@@ -53,5 +55,3 @@ CREATE TABLE siteMercadoDB.dbo.DetalhesPedidosTB (
 	ValorUnitário DECIMAL(6,2) CONSTRAINT NúmerosPositivosDetalhePedido CHECK (ValorUnitário > 0),
 );
 SELECT * FROM siteMercadoDB.dbo.DetalhesPedidosTB;
-
-UPDATE UsuáriosTB SET Cargo = 'moderador' WHERE IdUsuário = 3;

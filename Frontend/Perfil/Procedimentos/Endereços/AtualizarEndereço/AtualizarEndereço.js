@@ -20,19 +20,27 @@ function obterIdUsuario() {
 }
 
 //Atualizar
-const form = document.querySelector('#formLoginConta');
+const form = document.querySelector('#formCriaçãoEndereço');
+
 
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    const nome = document.getElementById('nome').value || null;
-    const email = document.getElementById('email').value || null;
-    const senha = document.getElementById('senha').value || null;
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const idEndereço = urlParams.get('idEndereço')
     const idUsuário = await obterIdUsuario();
-    const att = { idUsuário, nome, email, senha };
-
+    let nomeEndereço = document.getElementById('nomeEndereço').value || null;
+    let número = document.getElementById('numero').value || null;
+    let cep = document.getElementById('cep').value || null;
+    let rua = document.getElementById('rua').value || null;
+    let bairro = document.getElementById('bairro').value || null;
+    let cidade = document.getElementById('cidade').value || null;
+    let estado = document.getElementById('estado').value || null;
+    const att = {idEndereço,idUsuário,número, cep, rua, bairro, cidade, estado, nomeEndereço};
+    console.log(att);
     // Se o usuário confirmar, prossiga com a atualização
-    if (nome !== null || email !== null || senha !== null){
+    if (nomeEndereço !== null || número !== null || cep !== null || rua !== null || bairro !== null || cidade !== null || estado !== null){
         const confirmacao = window.confirm("Tem certeza que deseja atualizar os dados?");
         if (confirmacao) {
 
@@ -42,19 +50,18 @@ form.addEventListener('submit', async (event) => {
             body: JSON.stringify(att)
         };
 
-        await fetch('https://localhost:7071/Usuário/AtualizarUsuário', options)
+        await fetch('https://localhost:7071/Endereço/AtualizarEndereço', options)
             .then(res => {
                 if (!res.ok) {
                     return res.text().then(text => { throw new Error(text) })
                 } else {
-                    alert("Usuário atualizado com sucesso.");
+                    alert("Endereço atualizado com sucesso.");
                 }
             })
             .catch(error => {
                 alert(error);
             });
     }}else{
-        alert("Pelo menos um campo (nome, email ou senha) deve ter um valor para atualizar.");
+        alert("Pelo menos um campo deve ter um valor para atualizar.");
     }
 });
-
