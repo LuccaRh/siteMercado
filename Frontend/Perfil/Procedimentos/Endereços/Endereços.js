@@ -6,26 +6,26 @@ $(document).ready(async (event) => {
     FiltrarAjax(query);
 });
 
-function obterIdUsuario() {
-    return new Promise(async (resolve, reject) => {
-        try {
-            const response = await fetch('https://localhost:7071/Usuário/ObterInformacoesUsuario', {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                }
-            });
-            const data = await response.json();
-
-            const idUsuário = data["idUsuario"];
-
-            resolve(idUsuário);
-        } catch (error) {
-            console.error('Erro ao obter informações do usuário:', error);
-            reject(error);
+async function obterIdUsuario() {
+    try {
+      const response = await fetch('https://localhost:7071/Usuário/ObterInformacoesUsuario', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
-    });
-}
+      });
+      if (!response.ok) {
+        const errorMessage = await response.text(); // Ou response.json() dependendo do formato da resposta
+        throw new Error(errorMessage);
+      }
+      const data = await response.json();
+      const idUsuário = data["idUsuario"];
+      return idUsuário;
+  
+    } catch (error) {
+      console.error('Erro ao obter informações do usuário:', error);
+    }
+  }
 
 //Ao clicar no botão, é levado para a página e atualizar, com o id na sua query
 $(document).on('click', '.editar', function(){
@@ -33,6 +33,8 @@ $(document).on('click', '.editar', function(){
     let idEndereço = $(this).data()['id'];
     window.location.href = "AtualizarEndereço/AtualizarEndereço.html?idEndereço="+idEndereço
 })
+
+
 //Ao clicar é feito o request para a api do backend, já com o id na sua query
 $(document).on('click', '.excluir', function(){    
     let id = $(this).data('id');

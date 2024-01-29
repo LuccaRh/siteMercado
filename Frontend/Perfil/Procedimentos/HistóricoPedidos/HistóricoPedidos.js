@@ -1,20 +1,12 @@
-/*document.addEventListener("DOMContentLoaded", function () {
-    // Criar um novo elemento div
-    const novoElementoDiv = document.createElement('div');
-
-    // Configurar propriedades ou conteúdo do novo elemento
-    novoElementoDiv.textContent = 'Este é um novo elemento div criado dinamicamente!';
-
-    // Adicionar o novo elemento ao corpo da página
-    document.main.appendChild(novoElementoDiv);
-});*/
-
-//Pegar o endereço completo pelo idIndereço
 async function obterEndereço(idEndereço) {
     try {
         const response = await fetch('https://localhost:7071/Endereço/ListagemEndereço?idEndereço=' + idEndereço, {
             method: 'GET'
         });
+        if (!response.ok) {
+            const errorMessage = await response.text(); // Ou response.json() dependendo do formato da resposta
+            throw new Error(errorMessage);
+          }
         let datalist = await response.json();
         const data = datalist[0];
         const nomeEndereço = data['nomeEndereço'];
@@ -32,37 +24,45 @@ async function obterEndereço(idEndereço) {
 
 async function obterIdUsuario() {
     try {
-        const response = await fetch('https://localhost:7071/Usuário/ObterInformacoesUsuario', {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            }
-        });
-        const data = await response.json();
-
-        const idUsuário = data["idUsuario"];
-        return idUsuário;
+      const response = await fetch('https://localhost:7071/Usuário/ObterInformacoesUsuario', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      if (!response.ok) {
+        const errorMessage = await response.text(); // Ou response.json() dependendo do formato da resposta
+        throw new Error(errorMessage);
+      }
+      const data = await response.json();
+      const idUsuário = data["idUsuario"];
+      return idUsuário;
+  
     } catch (error) {
-        console.error('Erro ao obter informações do usuário:', error);
+      console.error('Erro ao obter informações do usuário:', error);
     }
 }
 
 let shop = document.getElementById("pedidos");
 
-async function generateShop() {
+async function gerarPedidos() {
     try {
         const idUsuario = await obterIdUsuario();
         const response = await fetch('https://localhost:7071/Pedido/ListagemPedido?idUsuário=' + idUsuario, {
             method: 'GET',
         });
+        if (!response.ok) {
+            const errorMessage = await response.text(); // Ou response.json() dependendo do formato da resposta
+            throw new Error(errorMessage);
+          }
         const data = await response.json();
 
-        // Criando uma key nova para 
+        // Pegando os indereços de cada pedido
+        // Lista com a funct assincrona obterEndereço, assim tendo uma promise em cada valor 
         const enderecosPromises = data.map(x => obterEndereço(x.idEndereço));
-        console.log(enderecosPromises)
-        // Aguardando a resolução de todas as Promises
+        // Resolução de cada promise da lista enderecosPromises, retornando uma lista de promises resolves
         const enderecos = await Promise.all(enderecosPromises);
-        console.log(enderecos);
+
         // Construindo o HTML
         const htmlContent = data.map((x, index) => {
             return `
@@ -83,4 +83,4 @@ async function generateShop() {
     }
 }
 
-generateShop();
+gerarPedidos();

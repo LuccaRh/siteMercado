@@ -15,5 +15,13 @@ namespace Mercado.BLL
         {
             return _PedidoDAL.ListarPedido(_Pedido);
         }
+        public Pedido CadastrarPedido(Pedido Pedido)
+        {
+            if (!_PedidoDAL.CadastrarPedido(Pedido))
+            {
+                throw new Exception("Erro ao cadastrar.");
+            }
+            return Pedido;
+        }
     }
 }

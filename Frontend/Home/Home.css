@@ -1,0 +1,99 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: sans-serif;
+  }
+  
+  i {
+    cursor: pointer;
+  }
+  
+  a {
+    text-decoration: none;
+    color: white;
+  }
+  
+ 
+  /**
+  * ! Shop items styles are here
+  **/
+  
+  .produtos {
+    display: grid;
+    grid-template-columns: repeat(3, 223px);
+    gap: 30px;
+    justify-content: center;
+  }
+  @media (max-width: 1000px) {
+    .produtos {
+      grid-template-columns: repeat(2, 223px);
+    }
+  }
+  
+  @media (max-width: 500px) {
+    .produtos {
+      grid-template-columns: repeat(1, 223px);
+    }
+  }
+  
+  .produtos {
+    border: 2px solid #212529;
+    border-radius: 4px;
+  }
+  
+  .details {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+  }
+  
+  .price-quantity {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  
+
+/** Notificação de produto adicionado ao carrinho **/
+.esconder {
+    display: none;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  #notificacaoAdd{
+  background-color: #4CAF50;
+}
+#notificacaoJaTem{
+  background-color: #aa2618;
+}
+#notificacaoAdd.mostrar {
+    display: block;
+    animation: fadeOut 1.5s forwards;
+}
+#notificacaoJaTem.mostrar {
+  display: block;
+  animation: fadeOut 1.5s forwards;
+}
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+
+.bi-x-lg {
+  color: red;
+  font-weight: bold;
+}

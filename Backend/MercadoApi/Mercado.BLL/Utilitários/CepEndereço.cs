@@ -22,7 +22,6 @@ namespace Mercado.BLL.Utilitários
                 dic.Add("Bairro", address.District);
                 dic.Add("Cidade", address.City);
                 dic.Add("Estado", address.State);
-                Console.WriteLine("{0} - {1} - {2} - {3}/{4}", address.ZipCode, address.Street, address.District, address.City, address.State);
             }
             return dic;
         }

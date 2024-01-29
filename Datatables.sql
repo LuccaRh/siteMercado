@@ -25,7 +25,7 @@ SELECT * FROM siteMercadoDB.dbo.UsuáriosTB;
 CREATE TABLE siteMercadoDB.dbo.EndereçosTB(
     IdEndereço INT PRIMARY KEY IDENTITY,
     IdUsuário INT FOREIGN KEY REFERENCES UsuáriosTB(IdUsuário),
-	NomeEndereço NVARCHAR(50) NOT NULL,
+	NomeEndereço NVARCHAR(50),
 	Número SMALLINT,
     CEP NVARCHAR(10),
     Rua NVARCHAR(255),
@@ -34,24 +34,31 @@ CREATE TABLE siteMercadoDB.dbo.EndereçosTB(
     Estado NVARCHAR(50),
 );
 SELECT * FROM siteMercadoDB.dbo.EndereçosTB;
-ALTER TABLE EndereçosTB ALTER COLUMN NomeEndereço NomeEndereço datatype NULL;
 
+/*Ao excluir o usuário, também excluir todos seus endereços*/
+ALTER TABLE EndereçosTB
+ADD CONSTRAINT DeleteUsuário_DeleteEndereços
+FOREIGN KEY (idUsuário)
+REFERENCES UsuáriosTB (idUsuário)
+ON DELETE CASCADE;
 
 CREATE TABLE siteMercadoDB.dbo.PedidosTB(
     IdPedido INT PRIMARY KEY IDENTITY,
-    IdUsuário INT FOREIGN KEY REFERENCES UsuáriosTB(IdUsuário),
-	IdEndereço INT FOREIGN KEY REFERENCES EndereçosTB(IdEndereço),
-    DataPedido DATETIME,
-	ValorTotal DECIMAL(10,2),
+    IdUsuário INT FOREIGN KEY REFERENCES UsuáriosTB(IdUsuário) NOT NULL,
+	IdEndereço INT FOREIGN KEY REFERENCES EndereçosTB(IdEndereço) NOT NULL,
+    DataPedido DATETIME NOT NULL,
+	ValorTotal DECIMAL(10,2) NOT NULL,
 );
+
 SELECT * FROM siteMercadoDB.dbo.PedidosTB;
 
 
 CREATE TABLE siteMercadoDB.dbo.DetalhesPedidosTB (
     idDetalhe INT PRIMARY KEY IDENTITY,
-    idPedido INT FOREIGN KEY REFERENCES PedidosTB(IdPedido),
-    idProduto INT FOREIGN KEY REFERENCES ProdutosTB(IdProduto),
-    Quantidade INT,
+    idPedido INT FOREIGN KEY REFERENCES PedidosTB(IdPedido) NOT NULL,
+    idProduto INT FOREIGN KEY REFERENCES ProdutosTB(IdProduto) NOT NULL,
+    Quantidade INT NOT NULL,
 	ValorUnitário DECIMAL(6,2) CONSTRAINT NúmerosPositivosDetalhePedido CHECK (ValorUnitário > 0),
 );
 SELECT * FROM siteMercadoDB.dbo.DetalhesPedidosTB;
+

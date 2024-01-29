@@ -18,5 +18,11 @@ namespace Mercado.DAL
             var lista = connection.Query<Pedido>(query, _Pedido) as List<Pedido>;
             return lista;
         }
+        public bool CadastrarPedido(Pedido Pedido)
+        {
+            using var connection = new BdConnection().AbrirConexao();
+            string query = _MétodosPedidoDAL.StringCadastro();
+            return connection.Execute(query, Pedido) > 0;
+        }
     }
 }

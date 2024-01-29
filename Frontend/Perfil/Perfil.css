@@ -12,3 +12,10 @@ p a{
     font-size: 20px;
     margin-right: 20px;
 }
+#deletelink {
+    cursor: pointer;
+}
+
+#deletelink:hover {
+    text-decoration: underline; /* Opcional: Adiciona um sublinhado ao texto quando o mouse está sobre ele */
+}

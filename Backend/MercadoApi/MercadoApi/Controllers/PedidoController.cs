@@ -25,5 +25,17 @@ namespace MercadoApi.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpPost("CadastroPedido")]
+        public IActionResult CadastroPedido([FromBody] Pedido _Pedido)
+        {
+            try
+            {
+                return Ok(_PedidoBLL.CadastrarPedido(_Pedido));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

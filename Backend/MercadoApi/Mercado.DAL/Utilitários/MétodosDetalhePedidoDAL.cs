@@ -1,25 +1,20 @@
 ﻿using Mercado.MOD;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mercado.DAL.Utilitários
 {
-    public class MétodosPedidoDAL
+    public class MétodosDetalhePedidoDAL
     {
-        public string StringListagem(Pedido _Pedido)
+        public string StringListagem(DetalhePedido _DetalhePedido)
         {
-            //Pega o nome de cada variável do objeto Pedido, verifica se no JSON foi passado algum valor para esta variável
+            //Pega o nome de cada variável do objeto DetalhePedido, verifica se no JSON foi passado algum valor para esta variável
             //Se foi, monta o resto da procura com WHERE e AND
-            string query = "SELECT * FROM PedidosTB";
+            string query = "SELECT * FROM DetalhesPedidosTB";
             bool filtragem = false;
-            PropertyInfo[] propriedades = _Pedido.GetType().GetProperties();
+            PropertyInfo[] propriedades = _DetalhePedido.GetType().GetProperties();
             foreach (PropertyInfo propriedade in propriedades)
             {
-                var valor = propriedade.GetValue(_Pedido, null);
+                var valor = propriedade.GetValue(_DetalhePedido, null);
                 string nomePropriedade = propriedade.Name;
                 if (valor != null)
                 {
@@ -32,11 +27,8 @@ namespace Mercado.DAL.Utilitários
                         query += " WHERE";
                         filtragem = true;
                     }
-
-
-
-                        // Caso contrário, use a comparação exata
-                        query += String.Format(" {0} = @{1}", nomePropriedade, nomePropriedade);
+                    // Caso contrário, use a comparação exata
+                    query += String.Format(" {0} = @{1}", nomePropriedade, nomePropriedade);
                     
                 }
 
@@ -46,13 +38,13 @@ namespace Mercado.DAL.Utilitários
         public string StringCadastro()
         {
             //loop para pegar o nome de cada propriedade do objeto, inserir elas no query
-            string query = "INSERT INTO PedidosTB (";
-            Type tipo = typeof(Pedido);
+            string query = "INSERT INTO DetalhesPedidosTB (";
+            Type tipo = typeof(DetalhePedido);
             PropertyInfo[] propriedades = tipo.GetProperties();
             foreach (PropertyInfo propriedade in propriedades)
             {
                 string nomePropriedade = propriedade.Name;
-                if (nomePropriedade == "idPedido") { continue; }
+                if (nomePropriedade == "idDetalhe") { continue; }
                 query += String.Format(" {0},", nomePropriedade);
             }
 
@@ -60,7 +52,7 @@ namespace Mercado.DAL.Utilitários
             foreach (PropertyInfo propriedade in propriedades)
             {
                 string nomePropriedade = propriedade.Name;
-                if (nomePropriedade == "idPedido") { continue; }
+                if (nomePropriedade == "idDetalhe") { continue; }
                 query += String.Format(" @{0},", nomePropriedade);
             }
             query = query.TrimEnd(',') + ")";

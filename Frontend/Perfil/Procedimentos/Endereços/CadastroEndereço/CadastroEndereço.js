@@ -1,30 +1,30 @@
-function obterIdUsuario() {
-    return new Promise(async (resolve, reject) => {
-        try {
-            const response = await fetch('https://localhost:7071/Usuário/ObterInformacoesUsuario', {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                }
-            });
-            const data = await response.json();
-  
-            const idUsuário = data["idUsuario"];
-  
-            resolve(idUsuário);
-        } catch (error) {
-            console.error('Erro ao obter informações do usuário:', error);
-            reject(error);
-        }
+async function obterIdUsuario() {
+  try {
+    const response = await fetch('https://localhost:7071/Usuário/ObterInformacoesUsuario', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
     });
+    if (!response.ok) {
+      const errorMessage = await response.text(); // Ou response.json() dependendo do formato da resposta
+      throw new Error(errorMessage);
+    }
+    const data = await response.json();
+    const idUsuário = data["idUsuario"];
+    return idUsuário;
+
+  } catch (error) {
+    console.error('Erro ao obter informações do usuário:', error);
   }
+}
 
 
 const criaçãoEndereçoForm = document.querySelector('#formCriaçãoEndereço');
 criaçãoEndereçoForm.addEventListener('submit', async (event) => {
   // Prevent form from submitting and refreshing the page
   event.preventDefault();
-
+  try {
     const idUsuário = await obterIdUsuario();
     let nomeEndereço = document.getElementById('nomeEndereço').value || null;
     let número = document.getElementById('numero').value || null;
@@ -33,23 +33,22 @@ criaçãoEndereçoForm.addEventListener('submit', async (event) => {
     let bairro = document.getElementById('bairro').value || null;
     let cidade = document.getElementById('cidade').value || null;
     let estado = document.getElementById('estado').value || null;
-    
-    const data = {idUsuário,número, cep, rua, bairro, cidade, estado, nomeEndereço};
-  const options = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
-  };
 
-  await fetch('https://localhost:7071/Endereço/CadastroEndereço', options).then( res=>{
-      if(!res.ok) {
-        return res.text().then(text => { throw new Error(text) })
-       }
-      else {
-       alert("Endereço Cadastrado.")
-     }
-    }).catch(error=>{
-        alert(error);
-    })
+    const data = { idUsuário, número, cep, rua, bairro, cidade, estado, nomeEndereço };
+    const options = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    };
 
+    const response = await fetch('https://localhost:7071/Endereço/CadastroEndereço', options)
+    if (!response.ok) {
+      const errorMessage = await response.text(); // Ou response.json() dependendo do formato da resposta
+      throw new Error(errorMessage);
+    }
+    alert("Endereço Cadastrado.")
+    location.reload();
+  } catch (error) {
+    alert(error);
+  }
 });
