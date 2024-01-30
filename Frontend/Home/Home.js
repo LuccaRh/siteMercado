@@ -173,7 +173,6 @@ function exibirNotificacao(mensagem, metodo) {
 
 function adicionarAoCarrinho(botao) {
     if (verificarLogado()) {
-        location.reload();
         return;
     }
     const produto = JSON.parse(botao.dataset.produto);
@@ -286,6 +285,19 @@ async function finalizarCompra() {
             };
             const response = await fetch("https://localhost:7071/DetalhePedido/CadastroDetalhePedido", options)
             if (!response.ok) {
+                const errorMessage = await response.text(); // Ou response.json() dependendo do formato da resposta
+                throw new Error(errorMessage);
+            }
+            //Atualizar quantidade do produto
+            quantidade = produto.quantidade - produto.quantidadeAtual
+            att = {idProduto, quantidade}
+            const optionsAtt = {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(att)
+            };
+            const responseAtt = await fetch('https://localhost:7071/Produto/AtualizarProduto', optionsAtt)
+            if (!responseAtt.ok) {
                 const errorMessage = await response.text(); // Ou response.json() dependendo do formato da resposta
                 throw new Error(errorMessage);
             }

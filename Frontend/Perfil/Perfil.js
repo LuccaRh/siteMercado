@@ -3,7 +3,8 @@ document.addEventListener("DOMContentLoaded", async (event) => {
     try {
 
         event.preventDefault();
-        let mod = document.getElementById('moderador');
+        let TAUsuário = document.getElementById('TAUsuário');
+        let TAProduto = document.getElementById('TAProduto');
         const response = await fetch('https://localhost:7071/Usuário/ObterInformacoesUsuario', {
             method: 'GET',
             headers: {
@@ -16,7 +17,8 @@ document.addEventListener("DOMContentLoaded", async (event) => {
         }
         const data = await response.json()
         if (data["cargo"] == "moderador") {
-            mod.style.display = "block";
+            TAUsuário.style.display = "block";
+            TAProduto.style.display = "block";
         }
 
     }

@@ -90,7 +90,7 @@ function FiltrarAjax(query){
                 { data: "cidade", className: "text-center" },
                 { data: "estado", className: "text-center" },
                 { data: "idEndereço", render: function(data) { 
-                    return '<button class="btn btn-primary glyphicon glyphicon-pencil editar" data-id="'+data+'"></button> <button class="btn btn-danger glyphicon glyphicon-remove excluir" data-id="'+data+'"></button>'}},
+                    return '<button class="botao-atualizar editar" data-id="'+data+'">Atualizar</button> <button class="botao-deletar excluir" data-id="'+data+'">Deletar</button>'}},
                 ]
             });
         },

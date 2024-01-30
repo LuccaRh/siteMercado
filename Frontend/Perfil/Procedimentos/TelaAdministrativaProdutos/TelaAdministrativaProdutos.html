@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel = "stylesheet" href = "../../../Header.css">
+        <link rel ="stylesheet" href = "TelaAdministrativaProdutos.css">
+        <title>Tela Administrativa Produtos</title>
+    </head>
+
+
+    <body>
+        <header>
+            <nav>
+                <h1 class = "logo"><a href="../../../Home/Home.html">Site Mercado</a></h1>
+                <ul>
+                    <li><a href="../../Perfil.html" ><span id = "Nome"></span></a></li>
+                    <li><a href="#" id="logoutLink">Logout</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <h1>Produtos:</h1>
+            <table>
+                <form>
+                    <th>
+                        <label for="nome">Nome:</label>
+                        <input type="text" id="nome" name="nome" ><br><br>
+                    </th>    
+                    <th>
+                        <label for="valorUnitário">Valor Unitário:</label>
+                        <input type="text" id="valorUnitário" name="valorUnitário"><br><br>
+                    </th>
+                    <th>
+                        <label for="unidade">Unidade:</label>
+                        <input type="text" id="unidade" name="unidade"><br><br>
+                    </th>
+                    <th>
+                        <label for="quantidade">Quantidade:</label>
+                        <input type="text" id="quantidade" name="quantidade"><br><br>
+                    </th>
+                        <button type="submit">Buscar</button>
+                    </th>
+                </form>
+            </table>
+            <table id = 'myTable'>
+                <thead>
+                    <tr>
+                        <th class="text-center">Imagem</th>
+                        <th class="text-center">Nome</th>
+                        <th class="text-center">Valor Unitário</th>
+                        <th class="text-center">Unidade</th>
+                        <th class="text-center">Quantidade</th>
+                        <th>
+                        
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </main>
+
+    </body>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.13.2/datatables.min.js"></script>
+    <script src="TelaAdministrativaProdutos.js"></script>
+    <script src="../../MétodosToken.js"></script>       
+</html>
