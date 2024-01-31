@@ -9,8 +9,7 @@ CREATE TABLE siteMercadoDB.dbo.ProdutosTB(
 	Quantidade SMALLINT,
 	Imagem VARCHAR(100) NOT NULL
 )
-SELECT * FROM siteMercadoDB.dbo.ProdutosTB;
-
+ 
 
 CREATE TABLE siteMercadoDB.dbo.UsuáriosTB(
 	IdUsuário INT PRIMARY KEY IDENTITY,
@@ -51,6 +50,8 @@ CREATE TABLE siteMercadoDB.dbo.PedidosTB(
 );
 
 SELECT * FROM siteMercadoDB.dbo.PedidosTB;
+DELETE FROM PedidosTB WHERE ValorTotal = 0.61;
+
 
 
 CREATE TABLE siteMercadoDB.dbo.DetalhesPedidosTB (

@@ -36,7 +36,7 @@ criaçãoContaForm.addEventListener('submit', async (event) => {
     const response = await fetch('https://localhost:7071/Usuário/CadastroUsuário', options)
     if (!response.ok) {
       const errorMessage = await response.text(); // Ou response.json() dependendo do formato da resposta
-      throw new Error(`Erro ao atualizar endereço: ${errorMessage}`);
+      throw new Error(`Erro ao cadastrar usuário: ${errorMessage}`);
     }
     
     alert("Usuário Cadastrado.")
