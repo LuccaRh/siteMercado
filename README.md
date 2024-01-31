@@ -10,7 +10,7 @@ Entre esses aspectos da programação, estão:
 * Criação de um site (html e css) para uma demonstração visual de todos os conceitos construídos
 * Uso de **Git e Github** para controle de versões e salvar arquivos
 # Como foi o planejamento para a criação do projeto? 
-Eu comecei o planejamento pesquisando sobre quais Api's públicas eu gostaria de usar. Depois de muita pesquisa, uma que me interessou bastante pelo quão completa e sem muitos problemas foi a **Spoonacular Api**.
+Eu comecei pesquisando sobre quais Api's públicas eu gostaria de usar. Depois de muita pesquisa, uma que me interessou bastante pelo quão completa e sem muitos problemas foi a **Spoonacular Api**.
 A partir dela, estudei como normalmente é a relação entre tabelas no banco de dados, e fiz um draft inicial com todas ideias que eu queria implementar no projeto no [figma](https://www.figma.com/file/oFvf9VsMy6DIrvGRUY4kJZ/Site-Compras-mercado?type=whiteboard&node-id=0%3A1&t=jT3Fmy5WAPWk1RRC-1) por meio de post-its. 
 Com essa página do figma, fiz parte a parte do projeto seguindo os post-its.
 # Projeto:
@@ -18,15 +18,16 @@ Com essa página do figma, fiz parte a parte do projeto seguindo os post-its.
   <summary>Coleta de dados</summary>
   Toda a parte de coleta de dados está na pasta "Dataset".
   Os dados foram coletados pela parte de [ingredientes](https://spoonacular.com/food-api/docs#Get-Ingredient-Information) da spoonacular Api. 
-  No próprio site há uma lista com os 1000 ingredientes mais famosos e seus respectivos id's. 
-  Com os id's, foi possível fazer requests para pegar as informações dos ingredientes, coloca-las num dataframe, e limpá-las, para enfim, adiconá-las ao banco de dados sql 
+  Para utilizar os dados é preciso criar uma conta, e usar a apiKey gerada nos paramâmetros da query nos requests. No meu caso, eu salvei o arquivo num .env, para utilizá-lo no código sem precisar mostrar a chave diretamente. (O arquivo .env faz parte do gitignore)
+  No próprio site há uma lista com os 1000 ingredientes mais famosos e seus respectivos id's, assim, foi possível [baixá-la](https://github.com/LuccaRh/siteMercado/blob/main/Dataset/top-1k-ingredients.csv) e converte-lá para dataframe. 
+  Com os id's, foi possível fazer requests para pegar as informações dos ingredientes, colocá-las num dataframe, e limpá-las, para enfim, adiconá-las ao banco de dados sql 
 </details>
 <details>
   <summary>Banco de dados Sql</summary>
   
   ## Diagrama do banco de dados:
   
-  ![Diagrama](DiagramaMercado.jpg)
+  ![Diagrama](Imagens/DiagramaMercado.jpg)
   
   Pelo diagrama, é possível ver que há 5 tabelas no banco de dados, que se conectam por seus id's.
   A criação do banco de dados e suas tabelas foram feitas com os comandos do arquivo "Datatables.sql"
@@ -38,7 +39,28 @@ Com essa página do figma, fiz parte a parte do projeto seguindo os post-its.
 </details>
 <details>
   <summary>Backend c#</summary>
+  O BackEnd do projeto foi feito em c# no Microsoft Visual Studio 2022. 
+  Nele, há 5 controllers, um para cada tabela do banco de dados. Para facilitar o uso deles, criei 3 camadas:
+  * MOD: Camada com os objetos que serão usados nas outras camadas e controllers. Ela possui variáveis proporcionais as colunas de sua respectiva tabela.
+  * BLL: Camada intermediária entre a DAL e controller. Faz as verificações do que está sendo mandado do input para o banco de dados, como por exemplo a verificação da senha, e a leitura do cep do endereço
+  * DAL: Camada de comunicação com o banco de dados. Cria a query que será usada para as ações feitas no sql. Para essa comunicação, foi utilizada as bibliotecas dapper e Microsoft.Data.SqlClient
 </details>
 <details>
   <summary>FrontEnd Javascript Html Css</summary>
+  O FrontEnd foi criado com html, css e javascript utilizando o vscode. Como o intuito do projeto não estava em seu visual, a parte do css acabou sendo mais simples, assim focando mais em como seria a comunicação das Api's com o navegador, e como dispor e utilizar das informações do banco de dados nele por meio do javascript, requests, Json, funções assíncronas e html.
+</details>
+
+# Site Mercado
+<details>
+  <summary>Cadastro</summary>
+  ![Diagrama](Imagens/Cadastro.jpg)
+  Ná página de cadastro, irá pedir para colocar nome, email e senha para realizar o cadastro. 
+  Caso o cadastro sejá inválido, irá mostrar na tela o erro que o ocorreu, entre eles incluí: 
+  * Senha inválida (Mínimo 8 caractéres e pelo menos um número e caracter especial, verificação realizada no [backend](https://github.com/LuccaRh/siteMercado/blob/main/Backend/MercadoApi/Mercado.BLL/Utilit%C3%A1rios/Verifica%C3%A7%C3%B5es.cs))
+  * Nome, email ou senha não preenchidos (verificação realizada no html, com input required) 
+  '''html 
+  <input type="text" id="nome" required>
+  <input type="text" id="email" required>
+  <input type="password" id="senha" required>
+  ''' 
 </details>
