@@ -18,9 +18,9 @@ Com essa página do figma, fiz parte a parte do projeto seguindo os post-its.
   <summary>Coleta de dados</summary>
   Toda a parte de coleta de dados está na pasta "Dataset".
   
-  Os dados foram coletados pela parte de [ingredientes](https://spoonacular.com/food-api/docs#Get-Ingredient-Information) da spoonacular Api. 
-  Para utilizar os dados é preciso criar uma conta, e usar a apiKey gerada nos paramâmetros da query nos requests. No meu caso, eu salvei o arquivo num .env, para utilizá-lo no código sem precisar mostrar a chave diretamente. (O arquivo .env faz parte do gitignore)
-  No próprio site há uma lista com os 1000 ingredientes mais famosos e seus respectivos id's, assim, foi possível [baixá-la](https://github.com/LuccaRh/siteMercado/blob/main/Dataset/top-1k-ingredients.csv) e converte-lá para dataframe. 
+  Os dados foram coletados pela parte de [ingredientes](https://spoonacular.com/food-api/docs#Get-Ingredient-Information) da spoonacular Api.\ 
+  Para utilizar os dados é preciso criar uma conta, e usar a apiKey gerada nos paramâmetros da query nos requests. No meu caso, eu salvei o arquivo num .env, para utilizá-lo no código sem precisar mostrar a chave diretamente. (O arquivo .env faz parte do gitignore)\
+  No próprio site há uma lista com os 1000 ingredientes mais famosos e seus respectivos id's, assim, foi possível [baixá-la](https://github.com/LuccaRh/siteMercado/blob/main/Dataset/top-1k-ingredients.csv) e converte-lá para dataframe.\ 
   Com os id's, foi possível fazer requests para pegar as [informações dos ingredientes, colocá-las num dataframe, limpá-las](https://github.com/LuccaRh/siteMercado/blob/main/Dataset/DatasetSpoonacularApi.ipynb), e [salvar estes dados](https://github.com/LuccaRh/siteMercado/blob/main/Dataset/SpoonacularApiDatasetSimples.csv), para enfim, [adiconá-las ao banco de dados sql](https://github.com/LuccaRh/siteMercado/blob/main/Dataset/Dataframe%20to%20Sql.ipynb) 
 </details>
 <details>
@@ -65,24 +65,24 @@ Com essa página do figma, fiz parte a parte do projeto seguindo os post-its.
   <img src="Imagens/Cadastro/ErroSenhaEspecial.jpg" width="400" height="343">\
 (O erro é reconhecido pelo backEnd, que cria uma notificação de erro para o frontEnd, e é pego pelo seu block **try catch**)
   ### Nome, email ou senha não preenchidos
-verificação realizada no html, com input required
+verificação realizada no html, com input required\
   '''html 
   <input type="text" id="nome" required>
   <input type="email" id="email" required>
   <input type="password" id="senha" required>
-  '''
+  '''\
 <img src="Imagens/Cadastro/ErroNomePreenchido.jpg" width="400" height="273">
 ### Verificação de email 
-Verificação realizada no html, com type = "email"
+Verificação realizada no html, com type = "email"\
 <img src="Imagens/Cadastro/ErroEmail.jpg" width="400" height="261">
 ### Nome e Email já cadastrados 
-Verificação realizada pelo sql server, colocando as colunas como UNIQUE
+Verificação realizada pelo sql server, colocando as colunas como UNIQUE\
 <img src="Imagens/Cadastro/ErroEmailDuplo.jpg" width="400" height="343">
 ## Cadastro com sucesso:
 Caso não haja erros no cadastro, irá ser realizado com sucesso, aparecendo uma mensagem de sucesso, e o usuário será redirecionado para a página de login.
 ![Cadastro com sucesso](Imagens/Cadastro/CadastroSucesso.jpg)
 No processo de criação do usuário, o backEnd irá pegar a senha feita pelo usuário, e [implementar hash, salt e pepper](https://github.com/LuccaRh/siteMercado/blob/main/Backend/MercadoApi/Mercado.BLL/Utilit%C3%A1rios/SenhaHashSaltPepper.cs) nela. Logo, no banco de dados ela não estará salva diretamente, mas sim, sua codificação junto com seu salt.
 Os dados do usuário por fim serão salvos na tabela de usuários no banco de dados.
-<img src="Imagens/Cadastro/TabelaUsuários.png">
+<img src="Imagens/Cadastro/TabelaUsuários.png">\
 (Note que o usuário já será cadastrado como cliente, pois só é possível ele ser moderador modificando diretamente pelo banco de dados, ou com outro moderador mudando seu cargo)
 </details>
