@@ -28,7 +28,7 @@ Com essa página do figma, fiz parte a parte do projeto seguindo os post-its.
   
   ## Diagrama do banco de dados:
   
-  ![Diagrama](Imagens/DiagramaMercado.jpg =250x250)
+  ![Diagrama](src="Imagens/DiagramaMercado.jpg" =250x250)
   
   Pelo diagrama, é possível ver que há 5 tabelas no banco de dados, que se conectam por seus id's.
   A criação do banco de dados e suas tabelas foram feitas com os comandos do arquivo "Datatables.sql". Foi utilizado no projeto **sql server** junto com **Microsoft Server Managment Studio**
@@ -62,7 +62,7 @@ Com essa página do figma, fiz parte a parte do projeto seguindo os post-its.
   Caso o cadastro sejá inválido, irá mostrar na tela o erro que o ocorreu, entre eles incluí: 
   ### Senha inválida 
   Mínimo 8 caractéres e pelo menos um número e caracter especial, verificação realizada no [backend](https://github.com/LuccaRh/siteMercado/blob/main/Backend/MercadoApi/Mercado.BLL/Utilit%C3%A1rios/Verifica%C3%A7%C3%B5es.cs))
-  ![Erro de Senha](Imagens/Cadastro/ErroSenhaEspecial.jpg width="50" height="50")
+  ![Erro de Senha](src="Imagens/Cadastro/ErroSenhaEspecial.jpg" width="50" height="50")
 (O erro é reconhecido pelo backEnd, que cria uma notificação de erro para o frontEnd, e é pego pelo seu block **try catch**)
   ### Nome, email ou senha não preenchidos
 verificação realizada no html, com input required
@@ -71,16 +71,16 @@ verificação realizada no html, com input required
   <input type="email" id="email" required>
   <input type="password" id="senha" required>
   '''
-![Erro de Preenchimento](Imagens/Cadastro/ErroNomePreenchido.jpg)
+![Erro de Preenchimento](src="Imagens/Cadastro/ErroNomePreenchido.jpg" width="50" height="50")
 ### Verificação de email 
 Verificação realizada no html, com type = "email"
-![Erro de email](Imagens/Cadastro/ErroEmail.jpg width="50" height="50")
+![Erro de email](src="Imagens/Cadastro/ErroEmail.jpg" width="50" height="50")
 ### Nome e Email já cadastrados 
 Verificação realizada pelo sql server, colocando as colunas como UNIQUE
-![Erro de variável dupla](Imagens/Cadastro/ErroEmailDuplo.jpg width="50" height="50")
+![Erro de variável dupla](src="Imagens/Cadastro/ErroEmailDuplo.jpg" width="50" height="50")
 ## Cadastro com sucesso:
 Caso não haja erros no cadastro, irá ser realizado com sucesso, aparecendo uma mensagem de sucesso, e o usuário será redirecionado para a página de login.
-![Cadastro com sucesso](Imagens/Cadastro/CadastroSucesso.jpg width="50" height="50")
+![Cadastro com sucesso](src="Imagens/Cadastro/CadastroSucesso.jpg" width="50" height="50")
 No processo de criação do usuário, o backEnd irá pegar a senha feita pelo usuário, e [implementar hash, salt e pepper](https://github.com/LuccaRh/siteMercado/blob/main/Backend/MercadoApi/Mercado.BLL/Utilit%C3%A1rios/SenhaHashSaltPepper.cs) nela. Logo, no banco de dados ela não estará salva diretamente, mas sim, sua codificação junto com seu salt.
 Os dados do usuário por fim serão salvos na tabela de usuários no banco de dados.
 ![Cadastro com sucesso](Imagens/Cadastro/TabelaUsuários.jpg)
