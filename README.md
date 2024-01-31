@@ -28,7 +28,7 @@ Com essa página do figma, fiz parte a parte do projeto seguindo os post-its.
   
   ## Diagrama do banco de dados:
   
-  ![Diagrama](src="Imagens/DiagramaMercado.jpg" =250x250)
+  <img src="Imagens/DiagramaMercado.jpg" =250x250>
   
   Pelo diagrama, é possível ver que há 5 tabelas no banco de dados, que se conectam por seus id's.
   A criação do banco de dados e suas tabelas foram feitas com os comandos do arquivo "Datatables.sql". Foi utilizado no projeto **sql server** junto com **Microsoft Server Managment Studio**
