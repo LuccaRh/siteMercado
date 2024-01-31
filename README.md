@@ -17,12 +17,17 @@ Com essa página do figma, fiz parte a parte do projeto seguindo os post-its.
 <details>
   <summary>Coleta de dados</summary>
   Toda a parte de coleta de dados está na pasta "Dataset".
-  Os dados foram coletados pela parte de [ingredientes](https://spoonacular.com/food-api/docs#Get-Ingredient-Information) da spoonacular Api. No próprio site há uma lista com os 1000 ingredientes mais famosos e seus respectivos id's. Com os id's, foi possível fazer requests para pegar as informações dos ingredientes, coloca-las num dataframe, e limpá-las, para enfim, adiconá-las ao banco de dados sql 
+  Os dados foram coletados pela parte de [ingredientes](https://spoonacular.com/food-api/docs#Get-Ingredient-Information) da spoonacular Api. 
+  No próprio site há uma lista com os 1000 ingredientes mais famosos e seus respectivos id's. 
+  Com os id's, foi possível fazer requests para pegar as informações dos ingredientes, coloca-las num dataframe, e limpá-las, para enfim, adiconá-las ao banco de dados sql 
 </details>
 <details>
   <summary>Banco de dados Sql</summary>
+  
   ## Diagrama do banco de dados:
-![Diagrama](DiagramaMercado.jpg)
+  
+  ![Diagrama](DiagramaMercado.jpg)
+  
   Pelo diagrama, é possível ver que há 5 tabelas no banco de dados, que se conectam por seus id's.
   A criação do banco de dados e suas tabelas foram feitas com os comandos do arquivo "Datatables.sql"
   * A tabela usuários possui as colunas idUsuário (key primária), email, nome, senha (já com hash salt e pepper), salt (criado pelo backend) e cargo (cliente ou moderador)
