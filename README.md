@@ -61,25 +61,19 @@ Com essa página do figma, fiz parte a parte do projeto seguindo os post-its.
   ## Cadastro Inválido:
   Caso o cadastro sejá inválido, irá mostrar na tela o erro que o ocorreu, entre eles incluí: 
   ### Senha inválida 
-  Mínimo 8 caractéres e pelo menos um número e caracter especial, verificação realizada no [backend](https://github.com/LuccaRh/siteMercado/blob/main/Backend/MercadoApi/Mercado.BLL/Utilit%C3%A1rios/Verifica%C3%A7%C3%B5es.cs))
+  Mínimo 8 caracteres e pelo menos um número e caracter especial, verificação realizada no [backend](https://github.com/LuccaRh/siteMercado/blob/main/Backend/MercadoApi/Mercado.BLL/Utilit%C3%A1rios/Verifica%C3%A7%C3%B5es.cs))
   <img src="Imagens/Cadastro/ErroSenhaEspecial.jpg" width="400" height="343">\
 (O erro é reconhecido pelo backEnd, que cria uma notificação de erro para o frontEnd, e é pego pelo seu block **try catch**)
   ### Nome, email ou senha não preenchidos
   
-Verificação realizada no html, com input required\
-
-  '''html 
-  <input type="text" id="nome" required>
-  <input type="email" id="email" required>
-  <input type="password" id="senha" required>
-  '''
+Verificação realizada no html, com input required
   
 <img src="Imagens/Cadastro/ErroNomePreenchido.jpg" width="400" height="273">\
 ### Verificação de email 
-Verificação realizada no html, com type = "email"\
+Verificação realizada no html, com type = "email"
 <img src="Imagens/Cadastro/ErroEmail.jpg" width="400" height="261">\
 ### Nome e Email já cadastrados 
-Verificação realizada pelo sql server, colocando as colunas como UNIQUE\
+Verificação realizada pelo sql server, colocando as colunas como UNIQUE
 <img src="Imagens/Cadastro/ErroEmailDuplo.jpg" width="400" height="343">\
 
 ## Cadastro com sucesso:
