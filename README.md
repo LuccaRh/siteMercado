@@ -66,11 +66,13 @@ Com essa página do figma, fiz parte a parte do projeto seguindo os post-its.
 (O erro é reconhecido pelo backEnd, que cria uma notificação de erro para o frontEnd, e é pego pelo seu block **try catch**)
   ### Nome, email ou senha não preenchidos
 verificação realizada no html, com input required\
+
   '''html 
   <input type="text" id="nome" required>
   <input type="email" id="email" required>
   <input type="password" id="senha" required>
   '''\
+  
 <img src="Imagens/Cadastro/ErroNomePreenchido.jpg" width="400" height="273">
 ### Verificação de email 
 Verificação realizada no html, com type = "email"\
@@ -80,9 +82,52 @@ Verificação realizada pelo sql server, colocando as colunas como UNIQUE\
 <img src="Imagens/Cadastro/ErroEmailDuplo.jpg" width="400" height="343">
 ## Cadastro com sucesso:
 Caso não haja erros no cadastro, irá ser realizado com sucesso, aparecendo uma mensagem de sucesso, e o usuário será redirecionado para a página de login.
+
 ![Cadastro com sucesso](Imagens/Cadastro/CadastroSucesso.jpg)
-No processo de criação do usuário, o backEnd irá pegar a senha feita pelo usuário, e [implementar hash, salt e pepper](https://github.com/LuccaRh/siteMercado/blob/main/Backend/MercadoApi/Mercado.BLL/Utilit%C3%A1rios/SenhaHashSaltPepper.cs) nela. Logo, no banco de dados ela não estará salva diretamente, mas sim, sua codificação junto com seu salt.
+
+No processo de criação do usuário, o backEnd irá pegar a senha feita pelo usuário, e [implementar hash, salt e pepper](https://github.com/LuccaRh/siteMercado/blob/main/Backend/MercadoApi/Mercado.BLL/Utilit%C3%A1rios/SenhaHashSaltPepper.cs) nela. Logo, ela não estará salva diretamente no banco de dados, mas sim, sua codificação junto com seu salt.
 Os dados do usuário por fim serão salvos na tabela de usuários no banco de dados.
 <img src="Imagens/Cadastro/TabelaUsuários.png">\
 (Note que o usuário já será cadastrado como cliente, pois só é possível ele ser moderador modificando diretamente pelo banco de dados, ou com outro moderador mudando seu cargo)
+</details>
+<details>
+  <summary>Login</summary>
+  <img src="Imagens/Login/Login.jpg">\
+  Na página de login, irá pedir para colocar nome e senha para realizar login.\
+  Ela possui verificações de preenchimento do nome e senha igual ao do cadastro, e obviamente, a verificação se o usuário existe no banco de dados.\
+  Primeiro é checado se o nome existe no banco de dados\
+  <img src="Imagens/Login/NomeNãoEncontrado.jpg">\
+  Caso o nome esteja no banco de dados, é checado a senha, codificando ela e a comparando com a salva no banco de dados, caso sejam iguais, o usuário é logado.\
+  <img src="Imagens/Login/SenhaErrada.jpg">\
+  
+  ## Token jwt
+  <img src="Imagens/Login/LoginSucesso.png">\
+  Caso as informações sejam certas, o login será realizado com sucesso, e o usuário irá ser redirecionado para o seu perfíl.\
+  Ao logar no site, um token jwt é criado pelo [backend](https://github.com/LuccaRh/siteMercado/tree/main/Backend/MercadoApi/TokenJwtLogin) e armazenado no localStorage do navegador. Além disso, um token de validade é criado no [frontend](https://github.com/LuccaRh/siteMercado/blob/main/Frontend/Login/Login.js) para o tempo máximo de validade do outro token\
+  <img src="Imagens/Login/Token.jpg">\
+  O token inclui o nome id e cargo do usuário, e é codificado, assim as informações dele só podem ser extraidas no backend.\
+  Com o token, o usuário é reconhecido no site, podendo acessar seu perfíl, criar e organizar seus endereços, comprar produtos, e caso seja moderador, administrar os usuários e produtos do site.\
+  Caso o token passe do tempo de validade, irá aparecer uma mensagem avisando sobre, e o usuário irá ser automaticamente levado para a tela de login denovo\
+  <img src="Imagens/Login/TokenValidade.jpg">\
+</details>
+<details>
+  <summary>Perfíl</summary>
+    <img src="Imagens/Perfil/PerfilCliente.jpg">\
+  A página de perfil começa com o texto "bem vindo {nome}", o nome é pego utilizando o token criado e extraindo o nome de usuário dele.\
+  O perfíl possui 3 links que levam o usuário para outra página (Atualizar, configuar Endereços e histórico de pedidos), e um botão para deletar o usuário, caso aperte o botão, irá abrir uma tela perguntando se tem certeza da ação, e caso confirme, o usuário então será deletado do banco de dados, e irá voltar para a página de cadastro.\
+  <img src="Imagens/Perfil/DeletarUsuário.png">\
+  Além disso, caso o usuário seja moderador, irá aparecer os links de administração de usuários e produtos:
+  <img src="Imagens/Perfil/PerfilModerador.jpg">\
+</details>
+<details>
+  <summary>Home</summary>
+</details>
+<details>
+  <summary>Atualizar Usuário</summary>
+</details>
+<details>
+  <summary>Configurar Endereços</summary>
+</details>
+<details>
+  <summary>Histórico de Pedidos</summary>
 </details>
