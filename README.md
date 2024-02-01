@@ -65,19 +65,17 @@ Com essa página do figma, fiz parte a parte do projeto seguindo os post-its.
   <img src="Imagens/Cadastro/ErroSenhaEspecial.jpg" width="400" height="343">\
 (O erro é reconhecido pelo backEnd, que cria uma notificação de erro para o frontEnd, e é pego pelo seu block **try catch**)
   ### Nome, email ou senha não preenchidos
-  
 Verificação realizada no html, com input required
-  
-<img src="Imagens/Cadastro/ErroNomePreenchido.jpg" width="400" height="273">\
+<img src="Imagens/Cadastro/ErroNomePreenchido.jpg" width="400" height="273">__
 ### Verificação de email 
-Verificação realizada no html, com type = "email"
-<img src="Imagens/Cadastro/ErroEmail.jpg" width="400" height="261">\
+Verificação realizada no html, com type = "email"__
+<img src="Imagens/Cadastro/ErroEmail.jpg" width="400" height="261">__
 ### Nome e Email já cadastrados 
-Verificação realizada pelo sql server, colocando as colunas como UNIQUE
-<img src="Imagens/Cadastro/ErroEmailDuplo.jpg" width="400" height="343">\
+Verificação realizada pelo sql server, colocando as colunas como UNIQUE__
+<img src="Imagens/Cadastro/ErroEmailDuplo.jpg" width="400" height="343">__
 
 ## Cadastro com sucesso:
-Caso não haja erros no cadastro, irá ser realizado com sucesso, aparecendo uma mensagem de sucesso, e o usuário será redirecionado para a página de login.\
+Caso não haja erros no cadastro, irá ser realizado com sucesso, aparecendo uma mensagem de sucesso, e o usuário será redirecionado para a página de login.__
 
 ![Cadastro com sucesso](Imagens/Cadastro/CadastroSucesso.jpg)\
 
