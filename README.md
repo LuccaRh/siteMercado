@@ -129,13 +129,32 @@ Os dados do usuário por fim serão salvos na tabela de usuários no banco de da
   <img src="Imagens/Perfil/PerfilModerador.jpg"><br/>
 </details>
 <details>
+  <summary>Configurar Endereços</summary>
+  <img src="Imagens/Endereço/Endereço.jpg"><br/>
+  Na página de endereços, irá aparecer um link para cadastrar um novo endereço, e uma tabela para organizar todos seus endereços.
+  
+  ### Cadadastro de novo endereço
+  <img src="Imagens/Endereço/CadastroEndereço.jpg"><br/>
+  Ao clickar no link, irá para uma página para criar um novo endereço, ao colocar suas informações, irá cadastrar o endereço no banco de dados, já linkado com o seu id de Usuário (pego pelo token). Caso coloque um cep válido, é possível deixar as outras opções vazias, sendo preenchidas automaticamente no backend
+</details>
+
+
+<details>
   <summary>Home</summary>
+  <img src="Imagens/Home/Home.jpg"><br/>
+  A página de home é onde tem todos os produtos que foram salvos no banco de dados.
+
+  ---
+
+  <img src="Imagens/Home/LogadoParaComprar.jpg"><br/> 
+  Ao clickar em comprar um dos produtos, se o usuário não estiver logado em sua conta, irá aparecer uma mensagem para logar.
+
+  ---
+
+  
 </details>
 <details>
   <summary>Atualizar Usuário</summary>
-</details>
-<details>
-  <summary>Configurar Endereços</summary>
 </details>
 <details>
   <summary>Histórico de Pedidos</summary>
