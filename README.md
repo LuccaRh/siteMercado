@@ -89,10 +89,14 @@ Os dados do usuário por fim serão salvos na tabela de usuários no banco de da
   <img src="Imagens/Login/Login.jpg"><br/>
   Na página de login, irá pedir para colocar nome e senha para realizar login.<br/>
   Ela possui verificações de preenchimento do nome e senha igual ao do cadastro, e obviamente, a verificação se o usuário existe no banco de dados.<br/>
-  --
+  
+  ---
+  
   Primeiro é checado se o nome existe no banco de dados:<br/>
   <img src="Imagens/Login/NomeNãoEncontrado.jpg"><br/>
-  --
+  
+  ---
+  
   Caso o nome esteja no banco de dados, é checado a senha, codificando ela e a comparando com a salva no banco de dados, caso sejam iguais, o usuário é logado.<br/>
   <img src="Imagens/Login/SenhaErrada.jpg"><br/>
   
@@ -103,7 +107,9 @@ Os dados do usuário por fim serão salvos na tabela de usuários no banco de da
   <img src="Imagens/Login/Token.jpg"><br/>
   O token inclui o nome id e cargo do usuário, e é codificado, assim as informações dele só podem ser extraidas no backend.<br/>
   Com o ele, o usuário é reconhecido no site, podendo acessar seu perfíl, criar e organizar seus endereços, comprar produtos, e caso seja moderador, administrar os usuários e produtos do site.<br/>
-  --
+  
+  ---
+  
   Caso o token passe do tempo de validade, irá aparecer uma mensagem avisando sobre, e o usuário irá ser automaticamente levado para a tela de login denovo<br/>
   <img src="Imagens/Login/ValidadeToken.jpg"><br/>
 </details>
@@ -111,10 +117,14 @@ Os dados do usuário por fim serão salvos na tabela de usuários no banco de da
   <summary>Perfíl</summary>
     <img src="Imagens/Perfil/PerfilCliente.jpg"><br/>
   A página de perfil começa com o texto "bem vindo {nome}", o nome é pego utilizando o token criado e extraindo o nome de usuário dele.<br/>
-  --
+  
+  ---
+  
   O perfíl possui 3 links que levam o usuário para outra página (Atualizar, configuar Endereços e histórico de pedidos), e um botão para deletar o usuário, caso aperte o botão, irá abrir uma tela perguntando se tem certeza da ação, e caso confirme, o usuário então será deletado do banco de dados, e irá voltar para a página de cadastro.<br/>
   <img src="Imagens/Perfil/DeletarUsuário.png"><br/>
-  --
+  
+  ---
+  
   Além disso, caso o usuário seja moderador, irá aparecer os links de administração de usuários e produtos:
   <img src="Imagens/Perfil/PerfilModerador.jpg"><br/>
 </details>
