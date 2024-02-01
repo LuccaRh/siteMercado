@@ -65,13 +65,14 @@ Com essa página do figma, fiz parte a parte do projeto seguindo os post-its.
   <img src="Imagens/Cadastro/ErroSenhaEspecial.jpg" width="400" height="343">\
 (O erro é reconhecido pelo backEnd, que cria uma notificação de erro para o frontEnd, e é pego pelo seu block **try catch**)
   ### Nome, email ou senha não preenchidos
-verificação realizada no html, com input required\
+  
+Verificação realizada no html, com input required\
 
   '''html 
   <input type="text" id="nome" required>
   <input type="email" id="email" required>
   <input type="password" id="senha" required>
-  '''\
+  '''
   
 <img src="Imagens/Cadastro/ErroNomePreenchido.jpg" width="400" height="273">
 ### Verificação de email 
