@@ -38,7 +38,7 @@ namespace Mercado.BLL
             }
             if (!_SenhaHashSaltPepper.VerifyPassword(_Usuário.senha, confirmação.salt, confirmação.senha))
             {
-                throw new Exception("Usuário não registrado");
+                throw new Exception("Senha errada.");
             }
             //Colocar cargo e id na entrada(_Usuário) para ser usado para criar o token
             _Usuário.cargo = confirmação.cargo;

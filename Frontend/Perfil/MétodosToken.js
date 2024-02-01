@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-//Utilizar do token para pegar nome do usuário
+//Utilizar do token para pegar nome do usuário para o nav
 document.addEventListener("DOMContentLoaded", async (event) => {
   event.preventDefault();
   try {

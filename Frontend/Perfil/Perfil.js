@@ -1,8 +1,9 @@
-//Utilizar do token para verificar cargo, e mostrar tela de administração
+//Utilizar do token para verificar cargo, e mostrar tela de administração, e para colocar o nome com o "Bem vindo"
 document.addEventListener("DOMContentLoaded", async (event) => {
     try {
 
         event.preventDefault();
+        let NomeBemVindo = document.getElementById('NomeBemVindo');
         let TAUsuário = document.getElementById('TAUsuário');
         let TAProduto = document.getElementById('TAProduto');
         const response = await fetch('https://localhost:7071/Usuário/ObterInformacoesUsuario', {
@@ -16,6 +17,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
             throw new Error(errorMessage);
         }
         const data = await response.json()
+        NomeBemVindo.textContent = data["nome"];
         if (data["cargo"] == "moderador") {
             TAUsuário.style.display = "block";
             TAProduto.style.display = "block";
