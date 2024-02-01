@@ -74,20 +74,21 @@ Verificação realizada no html, com input required\
   <input type="password" id="senha" required>
   '''
   
-<img src="Imagens/Cadastro/ErroNomePreenchido.jpg" width="400" height="273">
+<img src="Imagens/Cadastro/ErroNomePreenchido.jpg" width="400" height="273">\
 ### Verificação de email 
 Verificação realizada no html, com type = "email"\
-<img src="Imagens/Cadastro/ErroEmail.jpg" width="400" height="261">
+<img src="Imagens/Cadastro/ErroEmail.jpg" width="400" height="261">\
 ### Nome e Email já cadastrados 
 Verificação realizada pelo sql server, colocando as colunas como UNIQUE\
-<img src="Imagens/Cadastro/ErroEmailDuplo.jpg" width="400" height="343">
-## Cadastro com sucesso:
-Caso não haja erros no cadastro, irá ser realizado com sucesso, aparecendo uma mensagem de sucesso, e o usuário será redirecionado para a página de login.
+<img src="Imagens/Cadastro/ErroEmailDuplo.jpg" width="400" height="343">\
 
-![Cadastro com sucesso](Imagens/Cadastro/CadastroSucesso.jpg)
+## Cadastro com sucesso:
+Caso não haja erros no cadastro, irá ser realizado com sucesso, aparecendo uma mensagem de sucesso, e o usuário será redirecionado para a página de login.\
+
+![Cadastro com sucesso](Imagens/Cadastro/CadastroSucesso.jpg)\
 
 No processo de criação do usuário, o backEnd irá pegar a senha feita pelo usuário, e [implementar hash, salt e pepper](https://github.com/LuccaRh/siteMercado/blob/main/Backend/MercadoApi/Mercado.BLL/Utilit%C3%A1rios/SenhaHashSaltPepper.cs) nela. Logo, ela não estará salva diretamente no banco de dados, mas sim, sua codificação junto com seu salt.
-Os dados do usuário por fim serão salvos na tabela de usuários no banco de dados.
+Os dados do usuário por fim serão salvos na tabela de usuários no banco de dados.\
 <img src="Imagens/Cadastro/TabelaUsuários.png">\
 (Note que o usuário já será cadastrado como cliente, pois só é possível ele ser moderador modificando diretamente pelo banco de dados, ou com outro moderador mudando seu cargo)
 </details>
