@@ -131,14 +131,19 @@ Os dados do usuário por fim serão salvos na tabela de usuários no banco de da
 <details>
   <summary>Configurar Endereços</summary>
   <img src="Imagens/Endereço/Endereço.jpg"><br/>
-  Na página de endereços, irá aparecer um link para cadastrar um novo endereço, e uma tabela para organizar todos seus endereços.
+  Na página de endereços, irá aparecer um link para cadastrar um novo endereço, e uma tabela para organizar todos seus endereços, podendo buscar um endereço específico por suas características, e atualizar e deletar ele.
   
   ### Cadadastro de novo endereço
   <img src="Imagens/Endereço/CadastroEndereço.jpg"><br/>
-  Ao clickar no link, irá para uma página para criar um novo endereço, ao colocar suas informações, irá cadastrar o endereço no banco de dados, já linkado com o seu id de Usuário (pego pelo token). Caso coloque um cep válido, é possível deixar as outras opções vazias, sendo preenchidas automaticamente no backend
+  Ao clicar no link, você será redirecionado para uma página de criação de novo endereço. Ao inserir suas informações, o endereço será registrado no banco de dados, vinculado automaticamente ao seu ID de usuário (obtido através do token). Se fornecer um CEP válido, as demais opções podem permanecer em branco, sendo preenchidas automaticamente no [backend](https://github.com/LuccaRh/siteMercado/blob/main/Backend/MercadoApi/Mercado.BLL/Utilit%C3%A1rios/CepEndere%C3%A7o.cs).<br/>
+  O Endereço será cadastrado no banco de dados:<br/>
+<img src="Imagens/Endereço/BancoDeDadosCadastro.jpg"><br/>
+  ### Atualizar e deletar endereço
+  <img src="Imagens/Endereço/EndereçoNovo.jpg"><br/>
+  Voltando para a página de endereços, estará lá o endereço cadastrado com as opções atualizar e deletar. Ao clickar em atualizar será levado à página de atualizar, podendo modificar todas informações do endereço selecionado. Após fazer as modificações, pedirá uma confirmação, e depois uma mensagem de sucesso ou erro.<br/>
+  <img src="Imagens/Endereço/EndereçoAtt.jpg"><br/>  
+  Ao clickar em **deletar**, pedirá uma confirmação, e depois uma mensagem de sucesso ou erro.
 </details>
-
-
 <details>
   <summary>Home</summary>
   <img src="Imagens/Home/Home.jpg"><br/>
@@ -150,12 +155,37 @@ Os dados do usuário por fim serão salvos na tabela de usuários no banco de da
   Ao clickar em comprar um dos produtos, se o usuário não estiver logado em sua conta, irá aparecer uma mensagem para logar.
 
   ---
-
+<img src="Imagens/Home/Carrinho.jpg"><br/> 
+  Caso esteja logado, ao clickar no produto, irá aparecer uma notificação de confirmação que ele foi colocado no carrinho, ou que ele já esta no carrinho. Após colocar os produtos no carrinho, é possível atualizar suas quantidades ou remove-lo do carrinho.<br/>
+  Os endereços do usuário irão aparecer em baixo do carrinho, podendo escolher qual será o endereço para a compra.<br/>
+  Ao confirmar a compra, ela será colocada na tabela de pedidos, junto com seus detalhes: <br/>
   
-</details>
-<details>
-  <summary>Atualizar Usuário</summary>
+<img src="Imagens/Home/TabelaPedidos.jpg"> 
+<img src="Imagens/Home/TabelaDetalhesPedidos.jpg">
 </details>
 <details>
   <summary>Histórico de Pedidos</summary>
+  <img src="Imagens/HistóricoPedidos.jpg"><br/>
+  No histórico de pedidos, irá aparecer todos os pedidos feitos pelo usuário, com sua data, valor e endereço.
+</details>
+<details>
+  <summary>Atualizar Usuário</summary>
+  <img src="Imagens/Atualizar/Atualizar.jpg"><br/>
+  Na página de atualizar, irá poder mudar o nome, email e senha do usuário. Após confirmar as mudanças, irá aparecer uma notificação se ela foi feita com sucesso ou não, se foi, as alterações serão salvas no banco de dados: <br/>
+  <img src="Imagens/Atualizar/TabelaAtt.jpg"><br/>
+</details>
+<details>
+  <summary>Telas Administrativas para moderador</summary>
+  <img src="Imagens/Moderador/Perfil.jpg"><br/>
+  Caso o usuário seja moderador, no perfíl dele aparecerá os links Tela Administrativa de Usuários e de Produtos, para conseguir controlar os dois de maneira similar com o controle de endereços
+
+  ---
+
+  Usuários:<br/>
+  <img src="Imagens/Moderador/Usuarios.jpg"><br/>
+
+  ---
+
+  Produtos:<br/>
+  <img src="Imagens/Moderador/Produtos.jpg"><br/>
 </details>
