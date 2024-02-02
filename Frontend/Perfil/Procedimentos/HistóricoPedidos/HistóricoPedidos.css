@@ -1,0 +1,10 @@
+/* Estilo da borda para o bloco div */
+.pedido {
+  border: 2px solid   #a67676; /* Largura de 2 pixels, sólida e cor vermelha (#ff0000) */
+  padding: 10px; /* Adicionando algum preenchimento para afastar o conteúdo da borda */
+}
+
+/* Adicionando espaço entre os contêineres */
+.borda {
+  margin-bottom: 20px;
+}

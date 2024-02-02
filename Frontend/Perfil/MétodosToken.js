@@ -91,3 +91,4 @@ document.addEventListener("DOMContentLoaded", async (event) => {
     console.error('Erro ao obter informações do usuário:', error);
   }
 }); 
+

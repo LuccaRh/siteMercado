@@ -35,3 +35,7 @@ form {
     cursor: pointer;
     border-radius: 5px; /* Borda arredondada opcional */
   }
+
+  a {
+    color: #D6AFAF;
+  }

@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
         let nome = document.getElementById('Nome');
         let logado = document.getElementById('logado');
         let nãologado = document.getElementById('não logado');
+        //Verificar se está logado pelo token
         if (localStorage.getItem('token')) {
             const response = await fetch('https://localhost:7071/Usuário/ObterInformacoesUsuario', {
                 method: 'GET',
@@ -20,6 +21,20 @@ document.addEventListener("DOMContentLoaded", async (event) => {
             nome.textContent = data["nome"]; //Pegando nome do usuário para o Bem vindo, {nome} 
             logado.style.display = "block";
             nãologado.style.display = "none";
+
+
+            //Botão de logout
+            const logoutLink = document.getElementById('logoutLink');
+            if (logoutLink) {
+            logoutLink.addEventListener('click', function (event) {
+            event.preventDefault(); // Evita que o link redirecione para outra página
+            // Função de logout aqui (por exemplo, limpar o token do localStorage)
+            localStorage.removeItem('token');
+            localStorage.removeItem('tokenValidade');
+            // Redireciona para a página de login ou outra página desejada
+            location.reload()
+            });
+            }
         }
         else {
             logado.style.display = "none";
@@ -32,27 +47,8 @@ document.addEventListener("DOMContentLoaded", async (event) => {
     }
 });
 
-
-//Logout da página ao clickar em Logout
-document.addEventListener('DOMContentLoaded', function () {
-    const logoutLink = document.getElementById('logoutLink');
-
-    if (logoutLink) {
-        logoutLink.addEventListener('click', function (event) {
-            event.preventDefault(); // Evita que o link redirecione para outra página
-
-            // Função de logout aqui (por exemplo, limpar o token do localStorage)
-            localStorage.removeItem('token');
-            localStorage.removeItem('tokenValidade');
-            // Redireciona para a página de login ou outra página desejada
-            location.reload()
-        });
-    }
-});
-
-
-//Pegar id do usuário
-async function obterIdUsuario() {
+//Pegar id e nome do usuário
+async function obterNomeIdUsuario() {
     try {
         const response = await fetch('https://localhost:7071/Usuário/ObterInformacoesUsuario', {
             method: 'GET',
@@ -65,15 +61,14 @@ async function obterIdUsuario() {
             throw new Error(errorMessage);
         }
         const data = await response.json();
+        const nomeUsuário = data["nome"];
         const idUsuário = data["idUsuario"];
-        return idUsuário;
+        return {idUsuário, nomeUsuário};
 
     } catch (error) {
         console.error('Erro ao obter informações do usuário:', error);
     }
 }
-
-
 
 //Gerar produtos
 let shop = document.getElementById("produtos");
@@ -117,7 +112,6 @@ gerarProdutos();
 
 
 
-//Deixar usar carrinho apenas se estiver
 //Carrinho
 let carrinhoform = document.getElementById("carrinho-produtos");
 let carrinholist = [];
@@ -213,10 +207,8 @@ function verificarLogado() {
 }
 
 function removerDoCarrinho(idProduto) {
-    console.log(idProduto)
     //Filtrar para remover elemento com mesmo id do input da função
     carrinholist = carrinholist.filter((x) => x.idProduto !== idProduto);
-    console.log(carrinholist);
     exibirCarrinho();
 }
 
@@ -250,16 +242,23 @@ async function finalizarCompra() {
             return;
         }
         // Cadastro do pedido
+            //Pegar informações do endereço pelo selecionado 
         const enderecoSelect = document.getElementById('endereco');
         const idEndereço = parseInt(enderecoSelect.selectedOptions[0].value);
-        const idUsuário = await obterIdUsuario();
+        const EndereçoCompleto = enderecoSelect.selectedOptions[0].text;
+            //Pegar nome e idUsuário
+        const dadosUsuário = await obterNomeIdUsuario();
+        const idUsuário = dadosUsuário["idUsuário"];
+        const nomeUsuário = dadosUsuário["nomeUsuário"];
+            //Criar data atual para data da compra
         const tempoAtual = new Date();
         const DataPedido = obterDataHoraFormatada(tempoAtual);
+            //Calcular valor total do pedido
         let valorTotal = 0;
         const valor = carrinholist.map((produto) => { valorTotal += parseFloat(produto.valorAtual) })
         valorTotal = parseFloat(valorTotal.toFixed(2));
-        const data = { idUsuário, idEndereço, DataPedido, valorTotal };
-        console.log(data)
+            //Juntar tudo em um dicionário
+        const data = { idUsuário, idEndereço, DataPedido, valorTotal, EndereçoCompleto, nomeUsuário};
         const options = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -277,7 +276,6 @@ async function finalizarCompra() {
             let valorUnitário = produto.valorUnitário;
             let quantidade = produto.quantidadeAtual;
             let data = { idPedido, idProduto, valorUnitário, quantidade }
-            console.log(data);
             const options = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -324,10 +322,7 @@ async function getIdPedido(idUsuário, tempoPedido) {
             throw new Error(errorMessage);
         }
         const datalist = await response.json();
-        console.log(datalist)
         const data = datalist[0];
-        console.log(data)
-        console.log(data.idPedido);
         return data.idPedido;
     }
     catch (error) {
@@ -340,11 +335,14 @@ async function getIdPedido(idUsuário, tempoPedido) {
 
 
 
-//Endereço
+//Funções relacionadas ao endereço:
+
+//faz request para pegar todos endereços do usuário
 async function obterEndereços() {
     try {
-        const idUsuário = await obterIdUsuario();
-        const response = await fetch('https://localhost:7071/Endereço/ListagemEndereço?idUsuario=' + idUsuário, {
+        const dadosUsuário = await obterNomeIdUsuario();
+        const idUsuário = dadosUsuário["idUsuário"];
+        const response = await fetch('https://localhost:7071/Endereço/ListagemEndereço?idUsuário=' + idUsuário, {
             method: 'GET'
         });
         if (!response.ok) {
@@ -359,7 +357,7 @@ async function obterEndereços() {
         console.error('Erro ao obter informações do usuário:', error);
     }
 }
-
+//Cria string de endereço completo
 function EndereçoString(data) {
     const nomeEndereço = data['nomeEndereço'];
     const número = data['número'];
@@ -371,15 +369,14 @@ function EndereçoString(data) {
     return endereço;
 
 }
-
+//Pega todos endereços do usuário, coloca eles como opções, e cria valor (id) e texto (endereço completo) para cada um
 document.addEventListener('DOMContentLoaded', async function () {
     const endereçoSelect = document.getElementById('endereco');
     listaEndereços = await obterEndereços();
     for (let endereço of listaEndereços) {
         const option = document.createElement("option");
-        option.value = endereço.idEndereço; // Pode usar o índice como valor ou o próprio endereço
+        option.value = endereço.idEndereço; // Pode usar o índice como idEndereço
         option.text = endereço.endereço;
-        console.log()
         endereçoSelect.add(option);
     };
 });

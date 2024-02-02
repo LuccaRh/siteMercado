@@ -26,6 +26,9 @@ $(document).on('click', '.botao-deletar', function(){
                     success: function (data2) {
                     alert("Excluido com sucesso!");
                     location.reload();
+                    },
+                    error: function (request, status, error) {
+                        alert(request.responseText);
                     }
                 });
         }
